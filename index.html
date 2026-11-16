@@ -4,10 +4,10 @@
 <meta property="og:site_name" content="Realejo">
 <meta property="og:title" content="Realejo_notas e mensagens exclusivas">
 <meta property="og:description" content="Realejo · Bilhetes surpresa para compartilhar.">
-<meta property="og:image" content="https://joaofaustinojr.github.io/Realejo-/cartao-periquito.jpg">
-<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image" content="https://joaofaustinojr.github.io/Realejo-/icon-512.png">
+<meta property="og:image:width" content="512"><meta property="og:image:height" content="512"><meta property="og:image:type" content="image/png">
 <meta property="og:image:alt" content="Periquito verde com um bilhete dobrado no bico, pousado no realejo.">
-<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:card" content="summary">
 <style>
 :root{color-scheme:light;--ink:#302219;--green:#173c30;--cream:#faf4e9;--line:#dacbb3}
 *{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 80% 0%,#fffaf0,transparent 57%),var(--cream);color:var(--ink);font:17px Georgia,serif}
@@ -161,8 +161,8 @@ el('compose').onclick=el('reply').onclick=compose;
 el('form').oninput=()=>{const own=el('mode').value==='own';el('body').required=own;el('custom').hidden=!own;el('themes').hidden=own;el('preview').hidden=true;el('body').setCustomValidity('')};
 el('form').onsubmit=e=>{e.preventDefault();const body=el('body').value;if(el('mode').value==='own'&&!body.trim()){el('body').setCustomValidity('Escreva uma mensagem.');el('body').reportValidity();return}
 const sign=el('signature').value.trim(),n=el('mode').value==='own'?{body,sign}:{catalog:2,theme:el('theme').value,seed:crypto.getRandomValues(new Uint32Array(1))[0],sign};
-const url=new URL(location.href);url.hash='n='+encode(n);el('link').value=url.href;el('link').hidden=true;el('invite-link').href=url.href;el('sample').textContent=n.body??'O periquito vai tirar uma mensagem de '+n.theme.toLowerCase()+'.';el('sampleSign').textContent=sign;el('status').textContent='';el('preview').hidden=false;el('share').focus()};
-el('share').onclick=async()=>{if(!navigator.share)return el('copy').click();try{await navigator.share({title:'Realejo_notas e mensagens exclusivas',text:'Realejo_notas e mensagens exclusivas',url:el('link').value})}catch(e){if(e.name!=='AbortError')el('copy').click()}};
+const url=new URL('./?realejo=1',location.href);url.hash='n='+encode(n);el('link').value=url.href;el('link').hidden=true;el('invite-link').href=url.href;el('sample').textContent=n.body??'O periquito vai tirar uma mensagem de '+n.theme.toLowerCase()+'.';el('sampleSign').textContent=sign;el('status').textContent='';el('preview').hidden=false;el('share').focus()};
+el('share').onclick=async()=>{if(!navigator.share)return el('copy').click();try{await navigator.share({title:'Realejo_notas e mensagens exclusivas',url:el('link').value})}catch(e){if(e.name!=='AbortError')el('copy').click()}};
 el('copy').onclick=async()=>{try{await navigator.clipboard.writeText(el('link').value);el('status').textContent='Link copiado.'}catch{el('link').hidden=false;el('link').focus();el('link').select();el('status').textContent='Copie o link selecionado.'}};
 function receive(n,daily=false){note=n;screen('receive');el('greeting').textContent=daily?'Sua notinha do dia':'Tem uma notinha para você!'}
 el('daily').onclick=()=>{const day=Math.floor((Date.now()-new Date().getTimezoneOffset()*60000)/86400000);receive({body:dailyNotes[((day%dailyNotes.length)+dailyNotes.length)%dailyNotes.length],sign:''},true);el('turn').focus()};
@@ -304,7 +304,7 @@ el('install-app').onclick=async()=>{
     : 'Abra no navegador e use o menu ⋮ para escolher Instalar app ou Adicionar à tela inicial.';
 };
 el('share-app').onclick=async()=>{
-  const url=new URL('./',location.href).href;
+  const url=new URL('./?realejo=1',location.href).href;
   const title='Realejo · Notas e mensagens exclusivas';
   try{if(navigator.share){await navigator.share({title,url});return}}catch(error){if(error.name==='AbortError')return}
   try{await navigator.clipboard.writeText(url);el('app-status').textContent='Link do Realejo copiado.'}
