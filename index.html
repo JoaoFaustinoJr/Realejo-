@@ -267,7 +267,34 @@ const additions={
   ]
 };
 for(const [theme,messages] of Object.entries(additions))latestNotes[theme]=[...(currentNotes[theme]??[]),...messages];
-function notePool(version){return version===4?latestNotes:version===3?currentNotes:version===2?expandedNotes:notes}
+const occasionNotes={...latestNotes};
+for(const [theme,messages] of Object.entries({
+  "Boa tarde": [
+    "Boa tarde! Se der tempo, faz um café. Se sobrar um pouco, me chama.",
+    "Passei pra deixar um boa tarde e perguntar: como foi a primeira metade do seu dia?",
+    "Boa tarde! Que apareça uma conversa boa entre um compromisso e outro.",
+    "Que a tarde seja leve. E, se chover, que você esteja do lado de dentro com café passado."
+  ],
+  "Boa noite": [
+    "Boa noite! O resto da conversa a gente deixa pra amanhã. Gostei de falar com você.",
+    "A luz já apagou por aí? Passei só pra desejar que você durma bem.",
+    "Boa noite. Que Deus cuide do seu descanso e te dê um amanhecer tranquilo."
+  ],
+  "Boa viagem": [
+    "Boa viagem! Me dá um alô quando chegar. Vou gostar de saber que você chegou bem.",
+    "Que Deus acompanhe sua ida e sua volta. Aproveite o caminho.",
+    "Boa viagem! Se encontrar uma paisagem bonita, guarda um pedacinho dela numa foto pra mim.",
+    "Vai com calma, aproveita o caminho e volta com histórias pra contar."
+  ],
+  "Saudade": [
+    "Passei por aquele lugar e, por um segundo, achei que ia te encontrar lá.",
+    "Tinha café fresco aqui e faltou você pra tomar a segunda xícara.",
+    "Hoje deu saudade até de ouvir você contar uma história que eu já sei de cor."
+  ]
+})){
+  occasionNotes[theme]=[...(latestNotes[theme]??[]),...messages];
+}
+function notePool(version){return version===5?occasionNotes:version===4?latestNotes:version===3?currentNotes:version===2?expandedNotes:notes}
 const dailyNotes=[
  'Escolha uma coisa pequena para fazer com calma. Pode ser só tomar o primeiro café.',
  'Se lembrar de alguém hoje, diga. Às vezes a melhor hora de mandar um oi é a hora em que a pessoa vem à cabeça.',
@@ -291,10 +318,10 @@ const dailyNotes=[
  'De vez em quando, vale fazer um caminho diferente só para ver o que tem na outra rua.',
  'Lembre de alguém que lhe ensinou algo com paciência. Talvez seja um bom dia para agradecer.'
 ];
-for(const name of Object.keys(latestNotes))el('theme').add(new Option(name,name));
+for(const name of Object.keys(occasionNotes))el('theme').add(new Option(name,name));
 function screen(id){for(const name of ['home','editor','receive'])el(name).hidden=name!==id;el('stage-actions').hidden=id!=='receive';el('stage').parentElement.classList.toggle('receiving',id==='receive')}
 function encode(note){return btoa(Array.from(new TextEncoder().encode(JSON.stringify(typeof note.body==='string'?[note.body,note.sign]:[note.catalog,note.theme,note.seed,note.sign])),n=>String.fromCharCode(n)).join('')).replaceAll('+','-').replaceAll('/','_').replace(/=+$/,'')}
-function decode(code){if(code.length>4500)throw Error();const bytes=Uint8Array.from(atob(code.replaceAll('-','+').replaceAll('_','/')),c=>c.charCodeAt(0));const data=JSON.parse(new TextDecoder().decode(bytes));const n=Array.isArray(data)?data.length===2?{body:data[0],sign:data[1]}:data.length===3?{catalog:2,theme:data[0],seed:data[1],sign:data[2]}:data.length===4&&(data[0]===3||data[0]===4)?{catalog:data[0],theme:data[1],seed:data[2],sign:data[3]}:{}:data;if(typeof n.sign!=='string'||n.sign.length>60||!(typeof n.body==='string'&&n.body.trim()&&n.body.length<=400||Object.hasOwn(notePool(n.catalog),n.theme)&&Number.isInteger(n.seed)&&n.seed>=0))throw Error();return n}
+function decode(code){if(code.length>4500)throw Error();const bytes=Uint8Array.from(atob(code.replaceAll('-','+').replaceAll('_','/')),c=>c.charCodeAt(0));const data=JSON.parse(new TextDecoder().decode(bytes));const n=Array.isArray(data)?data.length===2?{body:data[0],sign:data[1]}:data.length===3?{catalog:2,theme:data[0],seed:data[1],sign:data[2]}:data.length===4&&(data[0]===3||data[0]===4||data[0]===5)?{catalog:data[0],theme:data[1],seed:data[2],sign:data[3]}:{}:data;if(typeof n.sign!=='string'||n.sign.length>60||!(typeof n.body==='string'&&n.body.trim()&&n.body.length<=400||Object.hasOwn(notePool(n.catalog),n.theme)&&Number.isInteger(n.seed)&&n.seed>=0))throw Error();return n}
 let note, audio, effectGain, duckTimer;
 const ambient=el('ambient');
 const sound=el('sound');
@@ -346,12 +373,12 @@ el('compose').onclick=el('reply').onclick=compose;
 el('form').oninput=()=>{const own=el('mode').value==='own';el('body').required=own;el('custom').hidden=!own;el('themes').hidden=own;el('preview').hidden=true;el('body').setCustomValidity('')};
 let previewNote;
 function drawNote(theme, sign, previous){
-  const count=latestNotes[theme].length;
+  const count=occasionNotes[theme].length;
   const random=crypto.getRandomValues(new Uint32Array(1))[0];
   const seed=previous?.theme===theme&&count>1
     ? (previous.seed+1+random%(count-1))%count
     : random%count;
-  return {catalog:4,theme,seed,sign};
+  return {catalog:5,theme,seed,sign};
 }
 function showPreview(note){
   previewNote=note;
