@@ -57,14 +57,22 @@ textarea,input,select{background:#1c2121;border-color:#6b5d46;color:var(--ink)}
 .stage video{animation:film-in .18s ease-out}@keyframes film-in{from{opacity:0}to{opacity:1}}
 @media(prefers-reduced-motion:reduce){.stage video{animation:none}}
 .app-mark{border-radius:8px}.app-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}.app-actions button{margin:0;font-size:.92rem}.sealed-invite{display:block;position:relative;isolation:isolate;overflow:hidden;min-height:225px;aspect-ratio:1.55;border:1px solid #9e8253;border-radius:9px;color:#ffe6b0;text-decoration:none;margin-bottom:12px;background:#17241f}.sealed-invite img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}.sealed-invite::before{content:"";position:absolute;inset:0;background:linear-gradient(0deg,#101612 2%,#101612da 20%,transparent 72%);z-index:-1}.sealed-invite span{position:absolute;inset:auto 16px 16px}.sealed-invite small{letter-spacing:.22em;font-size:.66rem;margin-bottom:5px}.sealed-invite strong{display:block;font:500 clamp(1.2rem,4vw,1.9rem)/1.1 Georgia,serif}#private-preview{margin:0 0 12px;color:#e3cd9f}#private-preview summary{cursor:pointer;font-size:.88rem}#private-preview p{margin:9px 0}
+@media (prefers-reduced-motion:no-preference){
+  #paper:not([hidden]){transform-origin:top center;animation:unfold-paper 440ms ease-out both}
+}
+@keyframes unfold-paper{
+  from{opacity:.45;transform:perspective(800px) rotateX(-35deg) scaleY(.7)}
+  to{opacity:1;transform:perspective(800px) rotateX(0) scaleY(1)}
+}
+#preview button,#receive button{margin-block:4px}
 </style>
 <header><span class="brand"><img class="app-mark" src="icon-192.png" width="34" height="34" alt="">REALEJO</span><button id="sound" class="alt" aria-pressed="false">Ligar som</button></header>
 <audio id="ambient" src="valsa-do-realejo.mp3" loop preload="none"></audio>
 <main><div class="stage" id="stage" aria-hidden="true"><video id="birdClip" src="periquito-entrega-nouveau.mp4" muted playsinline preload="metadata" hidden></video><span class="vines" aria-hidden="true"></span><span class="delivery">✉ Bilhete entregue</span></div>
 <div><section id="home"><h1>Uma notinha<br>para você.</h1><p>Escreva a notinha. O periquito faz a entrega.</p><div class="actions"><button id="compose">Mandar uma notinha</button><button id="daily" class="alt">Tirar minha notinha do dia</button></div><div class="app-actions"><button id="install-app" class="alt">Instalar</button><button id="share-app" class="alt">Compartilhar app</button></div><small id="app-status" role="status"></small></section>
 <section id="editor" hidden><h1>Mandar uma notinha</h1><form id="form"><label for="mode">Tipo de mensagem</label><select id="mode"><option value="own">Escrever minha notinha</option><option value="random">Sortear por tema</option></select><div id="custom"><label for="body">Sua mensagem</label><textarea id="body" rows="4" maxlength="400" required></textarea></div><div id="themes" hidden><label for="theme">Tema</label><select id="theme"></select></div><label for="signature">Assinatura (opcional)</label><input id="signature" maxlength="60"><button>Conferir cartão</button></form>
-<div id="preview" class="paper" hidden><a id="invite-link" class="sealed-invite"><img src="periquito-realejo.jpg" alt=""><span><small>REALEJO</small><strong>Tem uma mensagem para você</strong></span></a><details id="private-preview"><summary>Conferir minha mensagem</summary><p id="sample" class="message"></p><p id="sampleSign"></p></details><button id="share-interactive">Enviar notinha</button><button id="copy" class="alt">Copiar link</button><button id="share" class="alt" disabled>Compartilhar só a imagem</button><input id="link" aria-label="Endereço da notinha" readonly hidden><small id="status" role="status"></small></div></section>
-<section id="receive" hidden><h1 id="greeting">Tem uma mensagem para você</h1><p id="hint">Gire a manivela para o periquito entregar seu bilhete.</p><button id="turn">Girar a manivela</button><button id="unfold" hidden>✉️ Abrir a notinha</button><div id="paper" class="paper" hidden><div class="note-brand"><img src="periquito-realejo.jpg" alt="" width="58" height="58"><span>REALEJO</span></div><p id="message" class="message"></p><p id="signed"></p><p class="note-invite">Crie uma notinha e deixe o periquito entregar.</p></div><div id="note-tools" hidden><button id="share-note">Compartilhar imagem</button><button id="save-note" class="alt">Salvar imagem</button><button id="print-note" class="alt">Imprimir</button></div><small id="note-status" role="status"></small><button id="reply" class="alt" hidden>Mandar uma notinha de volta</button></section></div></main>
+<div id="preview" class="paper" hidden><a id="invite-link" class="sealed-invite"><img src="periquito-realejo.jpg" alt=""><span><small>REALEJO</small><strong>Tem uma mensagem para você</strong></span></a><details id="private-preview"><summary>Conferir minha mensagem</summary><p id="sample" class="message"></p><p id="sampleSign"></p></details><button id="share-interactive">Enviar esta notinha</button><button id="reroll" type="button" class="alt" hidden>Sortear outra</button><button id="copy" class="alt">Copiar link</button><button id="share" class="alt" disabled>Compartilhar só a imagem</button><input id="link" aria-label="Endereço da notinha" readonly hidden><small id="status" role="status"></small></div></section>
+<section id="receive" hidden><h1 id="greeting">Tem uma mensagem para você</h1><p id="hint">Gire a manivela para o periquito entregar seu bilhete.</p><button id="turn">Girar a manivela</button><button id="unfold" hidden>✉️ Abrir a notinha</button><div id="paper" class="paper" hidden><div class="note-brand"><img src="periquito-realejo.jpg" alt="" width="58" height="58"><span>REALEJO</span></div><p id="message" class="message"></p><p id="signed"></p><p class="note-invite">Crie uma notinha e deixe o periquito entregar.</p></div><button id="reply" hidden>Responder com uma notinha</button><div id="note-tools" hidden><button id="share-note" class="alt">Compartilhar imagem</button><button id="save-note" class="alt">Salvar imagem</button><button id="print-note" class="alt">Imprimir</button></div><small id="note-status" role="status"></small></section></div></main>
 <script>
 const el=id=>document.getElementById(id);
 const notes={
@@ -251,9 +259,49 @@ sound.onclick=()=>{
 function compose(){document.body.classList.remove('note-open');history.replaceState(null,'',location.pathname+location.search);el('stage').classList.remove('spin','show');screen('editor');el('mode').focus()}
 el('compose').onclick=el('reply').onclick=compose;
 el('form').oninput=()=>{const own=el('mode').value==='own';el('body').required=own;el('custom').hidden=!own;el('themes').hidden=own;el('preview').hidden=true;el('body').setCustomValidity('')};
-el('form').onsubmit=e=>{e.preventDefault();const body=el('body').value;if(el('mode').value==='own'&&!body.trim()){el('body').setCustomValidity('Escreva uma mensagem.');el('body').reportValidity();return}
-const sign=el('signature').value.trim(),n=el('mode').value==='own'?{body,sign}:{catalog:3,theme:el('theme').value,seed:crypto.getRandomValues(new Uint32Array(1))[0],sign};
-const url=new URL('./?cartao=2',location.href);url.hash='n='+encode(n);prepareInvitationCard();el('link').value=url.href;el('link').hidden=true;el('private-preview').open=false;el('invite-link').href=url.href;el('sample').textContent=n.body??'O periquito vai tirar uma mensagem de '+n.theme.toLowerCase()+'.';el('sampleSign').textContent=sign;el('status').textContent='';el('preview').hidden=false;el('invite-link').focus()};
+let previewNote;
+function drawNote(theme, sign, previous){
+  const count=currentNotes[theme].length;
+  const random=crypto.getRandomValues(new Uint32Array(1))[0];
+  const seed=previous?.theme===theme&&count>1
+    ? (previous.seed+1+random%(count-1))%count
+    : random%count;
+  return {catalog:3,theme,seed,sign};
+}
+function showPreview(note){
+  previewNote=note;
+  const pool=notePool(note.catalog)[note.theme];
+  const url=new URL('./?cartao=2',location.href);
+  url.hash='n='+encode(note);
+  el('link').value=url.href;
+  el('link').hidden=true;
+  el('invite-link').href=url.href;
+  el('sample').textContent=note.body??pool[note.seed%pool.length];
+  el('sampleSign').textContent=note.sign;
+  el('private-preview').open=true;
+  el('reroll').hidden=typeof note.body==='string'||pool.length<2;
+  el('status').textContent='';
+  el('preview').hidden=false;
+  prepareInvitationCard();
+}
+el('form').onsubmit=event=>{
+  event.preventDefault();
+  const body=el('body').value;
+  const own=el('mode').value==='own';
+  if(own&&!body.trim()){
+    el('body').setCustomValidity('Escreva uma mensagem.');
+    el('body').reportValidity();
+    return;
+  }
+  const sign=el('signature').value.trim();
+  showPreview(own?{body,sign}:drawNote(el('theme').value,sign));
+  el('sample').tabIndex=-1;
+  el('sample').focus();
+};
+el('reroll').onclick=()=>{
+  showPreview(drawNote(previewNote.theme,previewNote.sign,previewNote));
+  el('sample').focus();
+};
 el('share-interactive').onclick=async()=>{
   const text=el('link').value;
   if(!navigator.share)return el('copy').click();
