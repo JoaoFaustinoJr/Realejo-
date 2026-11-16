@@ -3,8 +3,10 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Realejo">
 <meta property="og:title" content="Tem uma mensagem para você">
-<meta property="og:description" content="Gire a manivela e descubra.">
-<meta property="og:image" content="https://joaofaustinojr.github.io/Realejo-/periquito-realejo.jpg">
+<meta property="og:description" content="Toque para abrir a notinha.">
+<meta property="og:image" content="https://joaofaustinojr.github.io/Realejo-/previa-notinha.jpg">
+<meta property="og:image:width" content="1000">
+<meta property="og:image:height" content="750">
 <meta property="og:image:type" content="image/jpeg">
 <meta property="og:image:alt" content="Periquito verde com um bilhete dobrado no bico, pousado no realejo.">
 <meta name="twitter:card" content="summary_large_image">
@@ -162,7 +164,7 @@ el('compose').onclick=el('reply').onclick=compose;
 el('form').oninput=()=>{const own=el('mode').value==='own';el('body').required=own;el('custom').hidden=!own;el('themes').hidden=own;el('preview').hidden=true;el('body').setCustomValidity('')};
 el('form').onsubmit=e=>{e.preventDefault();const body=el('body').value;if(el('mode').value==='own'&&!body.trim()){el('body').setCustomValidity('Escreva uma mensagem.');el('body').reportValidity();return}
 const sign=el('signature').value.trim(),n=el('mode').value==='own'?{body,sign}:{catalog:2,theme:el('theme').value,seed:crypto.getRandomValues(new Uint32Array(1))[0],sign};
-const url=new URL('./',location.href);url.hash='n='+encode(n);prepareInvitationCard();el('link').value=url.href;el('link').hidden=true;el('private-preview').open=false;el('invite-link').href=url.href;el('sample').textContent=n.body??'O periquito vai tirar uma mensagem de '+n.theme.toLowerCase()+'.';el('sampleSign').textContent=sign;el('status').textContent='';el('preview').hidden=false;el('invite-link').focus()};
+const url=new URL('./?cartao=2',location.href);url.hash='n='+encode(n);prepareInvitationCard();el('link').value=url.href;el('link').hidden=true;el('private-preview').open=false;el('invite-link').href=url.href;el('sample').textContent=n.body??'O periquito vai tirar uma mensagem de '+n.theme.toLowerCase()+'.';el('sampleSign').textContent=sign;el('status').textContent='';el('preview').hidden=false;el('invite-link').focus()};
 el('share-interactive').onclick=async()=>{
   const text=el('link').value;
   if(!navigator.share)return el('copy').click();
