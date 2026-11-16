@@ -10,6 +10,17 @@
 <meta property="og:image:type" content="image/jpeg">
 <meta property="og:image:alt" content="Periquito verde com um bilhete dobrado no bico, pousado no realejo.">
 <meta name="twitter:card" content="summary_large_image">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-KXDY9J9N3V"></script>
+<script>
+window.dataLayer=window.dataLayer||[];
+function gtag(){window.dataLayer.push(arguments)}
+gtag('js',new Date());
+// O fragmento do endereço contém o bilhete e a assinatura.
+gtag('config','G-KXDY9J9N3V',{
+  page_location:location.origin+location.pathname,
+  page_referrer:document.referrer?new URL(document.referrer).origin:''
+});
+</script>
 <style>
 :root{color-scheme:light;--ink:#302219;--green:#173c30;--cream:#faf4e9;--line:#dacbb3}
 *{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 80% 0%,#fffaf0,transparent 57%),var(--cream);color:var(--ink);font:17px Georgia,serif}
@@ -391,7 +402,7 @@ el('turn').onclick=()=>{
   fallback=setTimeout(delivered,4500);
   clip.play().catch(()=>{if(!el('turn').hidden)delivered()});
 };
-el('unfold').onclick=()=>{const pool=notePool(note.catalog)[note.theme];el('message').textContent=note.body??pool[note.seed%pool.length];el('signed').textContent=note.sign;el('signed').hidden=!note.sign;document.body.classList.add('note-open');el('paper').hidden=false;el('note-options').open=false;el('note-options').hidden=false;el('received-install').hidden=false;el('install-note').textContent=installed()?'Realejo instalado':'Instalar Realejo';prepareNoteImage();el('paper').tabIndex=-1;el('paper').focus();el('unfold').hidden=true;el('hint').hidden=true;el('reply').hidden=false};
+el('unfold').onclick=()=>{gtag('event','realejo_notinha_aberta');const pool=notePool(note.catalog)[note.theme];el('message').textContent=note.body??pool[note.seed%pool.length];el('signed').textContent=note.sign;el('signed').hidden=!note.sign;document.body.classList.add('note-open');el('paper').hidden=false;el('note-options').open=false;el('note-options').hidden=false;el('received-install').hidden=false;el('install-note').textContent=installed()?'Realejo instalado':'Instalar Realejo';prepareNoteImage();el('paper').tabIndex=-1;el('paper').focus();el('unfold').hidden=true;el('hint').hidden=true;el('reply').hidden=false};
 let noteImage;
 function wrappedLines(ctx,text,maxWidth){
   const rows=[];
