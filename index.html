@@ -61,7 +61,7 @@ textarea,input,select{background:#1c2121;border-color:#6b5d46;color:var(--ink)}
 <main><div class="stage" id="stage" aria-hidden="true"><video id="birdClip" src="periquito-entrega-nouveau.mp4" muted playsinline preload="metadata" hidden></video><span class="vines" aria-hidden="true"></span><span class="delivery">✉ Bilhete entregue</span></div>
 <div><section id="home"><h1>Uma notinha<br>para você.</h1><p>Escreva a notinha. O periquito faz a entrega.</p><div class="actions"><button id="compose">Mandar uma notinha</button><button id="daily" class="alt">Tirar minha notinha do dia</button></div><div class="app-actions"><button id="install-app" class="alt">Instalar</button><button id="share-app" class="alt">Compartilhar app</button></div><small id="app-status" role="status"></small></section>
 <section id="editor" hidden><h1>Mandar uma notinha</h1><form id="form"><label for="mode">Tipo de mensagem</label><select id="mode"><option value="own">Escrever minha notinha</option><option value="random">Sortear por tema</option></select><div id="custom"><label for="body">Sua mensagem</label><textarea id="body" rows="4" maxlength="400" required></textarea></div><div id="themes" hidden><label for="theme">Tema</label><select id="theme"></select></div><label for="signature">Assinatura (opcional)</label><input id="signature" maxlength="60"><button>Conferir cartão</button></form>
-<div id="preview" class="paper" hidden><a id="invite-link" class="sealed-invite"><img src="periquito-realejo.jpg" alt=""><span><small>REALEJO</small><strong>Tem uma mensagem para você</strong></span></a><details id="private-preview"><summary>Conferir minha mensagem</summary><p id="sample" class="message"></p><p id="sampleSign"></p></details><button id="share-interactive" disabled>Enviar notinha</button><button id="copy" class="alt">Copiar link</button><button id="share" class="alt" disabled>Compartilhar só a imagem</button><input id="link" aria-label="Endereço da notinha" readonly hidden><small id="status" role="status"></small></div></section>
+<div id="preview" class="paper" hidden><a id="invite-link" class="sealed-invite"><img src="periquito-realejo.jpg" alt=""><span><small>REALEJO</small><strong>Tem uma mensagem para você</strong></span></a><details id="private-preview"><summary>Conferir minha mensagem</summary><p id="sample" class="message"></p><p id="sampleSign"></p></details><button id="share-interactive">Enviar notinha</button><button id="copy" class="alt">Copiar link</button><button id="share" class="alt" disabled>Compartilhar só a imagem</button><input id="link" aria-label="Endereço da notinha" readonly hidden><small id="status" role="status"></small></div></section>
 <section id="receive" hidden><h1 id="greeting">Tem uma mensagem para você</h1><p id="hint">Gire a manivela para o periquito entregar seu bilhete.</p><button id="turn">Girar a manivela</button><button id="unfold" hidden>✉️ Abrir a notinha</button><div id="paper" class="paper" hidden><div class="note-brand"><img src="periquito-realejo.jpg" alt="" width="58" height="58"><span>REALEJO</span></div><p id="message" class="message"></p><p id="signed"></p><p class="note-invite">Crie uma notinha e deixe o periquito entregar.</p></div><div id="note-tools" hidden><button id="share-note">Compartilhar imagem</button><button id="save-note" class="alt">Salvar imagem</button><button id="print-note" class="alt">Imprimir</button></div><small id="note-status" role="status"></small><button id="reply" class="alt" hidden>Mandar uma notinha de volta</button></section></div></main>
 <script>
 const el=id=>document.getElementById(id);
@@ -164,11 +164,9 @@ el('form').onsubmit=e=>{e.preventDefault();const body=el('body').value;if(el('mo
 const sign=el('signature').value.trim(),n=el('mode').value==='own'?{body,sign}:{catalog:2,theme:el('theme').value,seed:crypto.getRandomValues(new Uint32Array(1))[0],sign};
 const url=new URL('./',location.href);url.hash='n='+encode(n);prepareInvitationCard();el('link').value=url.href;el('link').hidden=true;el('private-preview').open=false;el('invite-link').href=url.href;el('sample').textContent=n.body??'O periquito vai tirar uma mensagem de '+n.theme.toLowerCase()+'.';el('sampleSign').textContent=sign;el('status').textContent='';el('preview').hidden=false;el('invite-link').focus()};
 el('share-interactive').onclick=async()=>{
-  const url=el('link').value;
-  const title='Abra sua notinha 🎵';
-  const illustratedShare=invitationFile&&{files:[invitationFile],text:title+'\n'+url};
-  if(!illustratedShare||!navigator.share||!navigator.canShare?.(illustratedShare))return el('copy').click();
-  try{await navigator.share(illustratedShare)}
+  const text=el('link').value;
+  if(!navigator.share)return el('copy').click();
+  try{await navigator.share({text})}
   catch(error){if(error.name!=='AbortError')el('copy').click()}
 };
 el('copy').onclick=async()=>{try{await navigator.clipboard.writeText(el('link').value);el('status').textContent='Link copiado.'}catch{el('link').hidden=false;el('link').focus();el('link').select();el('status').textContent='Copie o link selecionado.'}};
@@ -298,9 +296,7 @@ async function prepareInvitationCard(){
     if(!blob)throw new Error('Cartão indisponível');
     invitationFile=new File([blob],'cartao-realejo.jpg',{type:'image/jpeg'});
     el('share').disabled=false;
-    el('share-interactive').disabled=false;
   }catch{
-    el('share-interactive').disabled=false;
     el('status').textContent='Cartão indisponível. Você pode enviar a notinha interativa.';
   }
 }
