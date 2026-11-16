@@ -86,6 +86,10 @@ const expandedNotes={
  'Incentivo': ['Se hoje só der para fazer uma parte, já vale começar por ela.','Se precisar de companhia para dar o primeiro passo, me chama.','Leve o tempo que precisar. Eu continuo torcendo por você.','Quando bater a dúvida, lembre de uma coisa que hoje você faz e antes achava difícil.'],
  'Parabéns': ['Fiquei feliz com a notícia. Sei o quanto você trabalhou para chegar até aqui.','Tire um instante para comemorar. Você também merece aproveitar o que conquistou.','Bonito ver uma ideia sua ganhar forma. Parabéns por levar adiante.','Parabéns! Espero que você possa contar essa história com calma e um sorriso.']
 };
+// Fontes dos excertos clássicos:
+// https://pt.wikisource.org/wiki/Canção_do_Exílio_(Gonçalves_Dias)
+// https://machado.byu.edu/text/o-espelho/?lang=pt
+// https://dominiopublico.mec.gov.br/pesquisa/DetalheObraDownload.do?co_midia=2&co_obra=28379&select_action=
 const currentNotes={
   "Carinho": [
     "Só passei para dizer que gosto muito de ter você por perto.",
@@ -163,6 +167,11 @@ const currentNotes={
     "Que a noite seja tranquila e o despertador demore a tocar.",
     "Passei para te desejar boa noite e deixar um abraço aqui.",
     "Boa noite! Que você encontre sossego até nas coisas que ficaram para amanhã."
+  ],
+  "Clássicos": [
+    "“Minha terra tem palmeiras,\nOnde canta o Sabiá.”\n— Gonçalves Dias, Canção do Exílio",
+    "“A melhor definição do amor não vale um beijo de moça namorada”\n— Machado de Assis, O espelho",
+    "“Amor é um fogo que arde sem se ver”\n— Luís de Camões, Rimas"
   ]
 };
 function notePool(version){return version===3?currentNotes:version===2?expandedNotes:notes}
