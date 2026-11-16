@@ -34,7 +34,7 @@ textarea,input,select{background:#1c2121;border-color:#6b5d46;color:var(--ink)}
 .delivery{background:#28251d;color:#ecd5a5;border:1px solid #8b7147}
 :focus-visible{outline-color:#e4c88e}
 @media(max-width:720px){main{gap:22px}.stage{border-radius:12px}}
-.note-brand{display:flex;align-items:center;gap:11px;margin-bottom:19px;padding-bottom:13px;border-bottom:1px solid #77623e;color:#e2c68f;font:700 .8rem Georgia,serif;letter-spacing:.15em}.note-brand img{width:58px;height:58px;object-fit:cover;object-position:59% center;border-radius:50%;border:1px solid #a58954}.note-invite{margin:18px 0 0;padding-top:12px;border-top:1px solid #77623e;font-size:.88rem;color:#cbb995}
+.note-brand{display:flex;align-items:center;gap:11px;margin-bottom:19px;padding-bottom:13px;border-bottom:1px solid #77623e;color:#e2c68f;font:700 .8rem Georgia,serif;letter-spacing:.15em}.note-brand img{width:58px;height:58px;object-fit:cover;object-position:59% center;border-radius:50%;border:1px solid #a58954}
 .stage video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}.stage::before{z-index:1}.delivery{z-index:2}
 .note-open main{display:block;max-width:790px;padding-top:clamp(20px,5vw,50px)}
 .note-open .stage,.note-open #greeting{display:none}
@@ -46,7 +46,7 @@ textarea,input,select{background:#1c2121;border-color:#6b5d46;color:var(--ink)}
 @media print{
   @page{margin:15mm}
   html,body{color-scheme:light!important;background:#fff!important;color:#201d17!important}
-  body>header,.stage,#greeting,#hint,#turn,#unfold,#note-tools,#note-status,#reply{display:none!important}
+  body>header,.stage,#greeting,#hint,#turn,#unfold,#note-options,#note-status,#reply,#received-install,.app-credit{display:none!important}
   .note-open main{display:block;max-width:none;padding:0}
   #paper{background:#fff!important;color:#201d17!important;box-shadow:none;border:1px solid #9c8350;break-inside:avoid;margin:0}
   #paper p,#paper .note-brand{color:#201d17!important}
@@ -65,6 +65,19 @@ textarea,input,select{background:#1c2121;border-color:#6b5d46;color:var(--ink)}
   to{opacity:1;transform:perspective(800px) rotateX(0) scaleY(1)}
 }
 #preview button,#receive button{margin-block:4px}
+#paper{padding:clamp(23px,6vw,40px);border-color:#b59a67}
+#paper .message{font-size:clamp(1.32rem,4.8vw,1.82rem);line-height:1.42;margin:24px 0 0}
+#signed{margin:18px 0 0;font-size:1.04rem}
+#receive #reply{font-size:.95rem;padding:9px 14px}
+#note-options{margin-top:14px}
+#note-options summary{cursor:pointer;color:var(--green);padding:8px 0;font-size:.94rem}
+#note-tools{margin-top:8px}
+#receive #note-tools button,#receive #install-note{font-size:.88rem;padding:8px 12px}
+#received-install{margin-top:12px}
+.app-credit{text-align:center;border-top:1px solid #9d825244;padding:18px 16px;color:var(--green)}
+.app-credit small{font-size:.78rem}
+.credit-family{display:inline-flex;gap:8px;align-items:center;font-size:.88rem}
+.tangram-mark{width:15px;height:15px;display:inline-block;transform:rotate(-12deg);background:conic-gradient(from 45deg,#b38b50 0 90deg,#e6c58a 90deg 180deg,#866537 180deg 270deg,#caa770 270deg);border:1px solid #dfbe83}
 </style>
 <header><span class="brand"><img class="app-mark" src="icon-192.png" width="34" height="34" alt="">REALEJO</span><button id="sound" class="alt" aria-pressed="false">Ligar som</button></header>
 <audio id="ambient" src="valsa-do-realejo.mp3" loop preload="none"></audio>
@@ -72,7 +85,7 @@ textarea,input,select{background:#1c2121;border-color:#6b5d46;color:var(--ink)}
 <div><section id="home"><h1>Uma notinha<br>para você.</h1><p>Escreva a notinha. O periquito faz a entrega.</p><div class="actions"><button id="compose">Mandar uma notinha</button><button id="daily" class="alt">Tirar minha notinha do dia</button></div><div class="app-actions"><button id="install-app" class="alt">Instalar</button><button id="share-app" class="alt">Compartilhar app</button></div><small id="app-status" role="status"></small></section>
 <section id="editor" hidden><h1>Mandar uma notinha</h1><form id="form"><label for="mode">Tipo de mensagem</label><select id="mode"><option value="own">Escrever minha notinha</option><option value="random">Sortear por tema</option></select><div id="custom"><label for="body">Sua mensagem</label><textarea id="body" rows="4" maxlength="400" required></textarea></div><div id="themes" hidden><label for="theme">Tema</label><select id="theme"></select></div><label for="signature">Assinatura (opcional)</label><input id="signature" maxlength="60"><button>Conferir cartão</button></form>
 <div id="preview" class="paper" hidden><a id="invite-link" class="sealed-invite"><img src="periquito-realejo.jpg" alt=""><span><small>REALEJO</small><strong>Tem uma mensagem para você</strong></span></a><details id="private-preview"><summary>Conferir minha mensagem</summary><p id="sample" class="message"></p><p id="sampleSign"></p></details><button id="share-interactive">Enviar esta notinha</button><button id="reroll" type="button" class="alt" hidden>Sortear outra</button><button id="copy" class="alt">Copiar link</button><button id="share" class="alt" disabled>Compartilhar só a imagem</button><input id="link" aria-label="Endereço da notinha" readonly hidden><small id="status" role="status"></small></div></section>
-<section id="receive" hidden><h1 id="greeting">Tem uma mensagem para você</h1><p id="hint">Gire a manivela para o periquito entregar seu bilhete.</p><button id="turn">Girar a manivela</button><button id="unfold" hidden>✉️ Abrir a notinha</button><div id="paper" class="paper" hidden><div class="note-brand"><img src="periquito-realejo.jpg" alt="" width="58" height="58"><span>REALEJO</span></div><p id="message" class="message"></p><p id="signed"></p><p class="note-invite">Crie uma notinha e deixe o periquito entregar.</p></div><button id="reply" hidden>Responder com uma notinha</button><div id="note-tools" hidden><button id="share-note" class="alt">Compartilhar imagem</button><button id="save-note" class="alt">Salvar imagem</button><button id="print-note" class="alt">Imprimir</button></div><small id="note-status" role="status"></small></section></div></main>
+<section id="receive" hidden><h1 id="greeting">Tem uma mensagem para você</h1><p id="hint">Gire a manivela para o periquito entregar seu bilhete.</p><button id="turn">Girar a manivela</button><button id="unfold" hidden>✉️ Abrir a notinha</button><div id="paper" class="paper" hidden><div class="note-brand"><img src="periquito-realejo.jpg" alt="" width="58" height="58"><span>REALEJO</span></div><p id="message" class="message"></p><p id="signed"></p></div><button id="reply" hidden>Responder com uma notinha</button><details id="note-options" hidden><summary>Opções da notinha</summary><div id="note-tools"><button id="share-note" class="alt">Compartilhar imagem</button><button id="save-note" class="alt">Salvar imagem</button><button id="print-note" class="alt">Imprimir</button></div></details><small id="note-status" role="status"></small><div id="received-install" hidden><button id="install-note" class="alt" type="button">Instalar Realejo</button><small id="install-note-status" role="status"></small></div></section></div></main><footer class="app-credit"><span class="credit-family"><span class="tangram-mark" aria-hidden="true"></span>Família Tangram</span><small>Criado por Professor João Faustino Júnior</small></footer>
 <script>
 const el=id=>document.getElementById(id);
 const notes={
@@ -338,7 +351,7 @@ el('turn').onclick=()=>{
     fallback=setTimeout(delivered,1500);
   });
 };
-el('unfold').onclick=()=>{const pool=notePool(note.catalog)[note.theme];el('message').textContent=note.body??pool[note.seed%pool.length];el('signed').textContent=note.sign;el('signed').hidden=!note.sign;document.body.classList.add('note-open');el('paper').hidden=false;el('note-tools').hidden=false;prepareNoteImage();el('paper').tabIndex=-1;el('paper').focus();el('unfold').hidden=true;el('hint').hidden=true;el('reply').hidden=false};
+el('unfold').onclick=()=>{const pool=notePool(note.catalog)[note.theme];el('message').textContent=note.body??pool[note.seed%pool.length];el('signed').textContent=note.sign;el('signed').hidden=!note.sign;document.body.classList.add('note-open');el('paper').hidden=false;el('note-options').open=false;el('note-options').hidden=false;el('received-install').hidden=installed();prepareNoteImage();el('paper').tabIndex=-1;el('paper').focus();el('unfold').hidden=true;el('hint').hidden=true;el('reply').hidden=false};
 let noteImage;
 function wrappedLines(ctx,text,maxWidth){
   const rows=[];
@@ -491,17 +504,20 @@ let installPrompt;
 const installed=()=>matchMedia('(display-mode: standalone)').matches||navigator.standalone===true;
 el('install-app').hidden=installed();
 window.addEventListener('beforeinstallprompt',event=>{event.preventDefault();installPrompt=event});
-window.addEventListener('appinstalled',()=>{installPrompt=null;el('install-app').hidden=true});
-el('install-app').onclick=async()=>{
+window.addEventListener('appinstalled',()=>{installPrompt=null;el('install-app').hidden=true;el('received-install').hidden=true});
+async function requestInstall(status){
+  status.textContent='';
   if(installPrompt){
     const prompt=installPrompt;
     installPrompt=null;
     try{await prompt.prompt();return}catch{}
   }
-  el('app-status').textContent=/iPad|iPhone|iPod/.test(navigator.userAgent)
+  status.textContent=/iPad|iPhone|iPod/.test(navigator.userAgent)
     ? 'No Safari, toque em Compartilhar e depois em Adicionar à Tela de Início.'
     : 'Abra no navegador e use o menu ⋮ para escolher Instalar app ou Adicionar à tela inicial.';
-};
+}
+el('install-app').onclick=()=>requestInstall(el('app-status'));
+el('install-note').onclick=()=>requestInstall(el('install-note-status'));
 el('share-app').onclick=async()=>{
   const url=new URL('./?realejo=8',location.href).href;
   const title='Realejo · Notas e mensagens exclusivas';
