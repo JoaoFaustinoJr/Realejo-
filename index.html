@@ -61,7 +61,7 @@ textarea,input,select{background:#1c2121;border-color:#6b5d46;color:var(--ink)}
 <main><div class="stage" id="stage" aria-hidden="true"><video id="birdClip" src="periquito-entrega-nouveau.mp4" muted playsinline preload="metadata" hidden></video><span class="vines" aria-hidden="true"></span><span class="delivery">✉ Bilhete entregue</span></div>
 <div><section id="home"><h1>Uma notinha<br>para você.</h1><p>Escreva a notinha. O periquito faz a entrega.</p><div class="actions"><button id="compose">Mandar uma notinha</button><button id="daily" class="alt">Tirar minha notinha do dia</button></div><div class="app-actions"><button id="install-app" class="alt">Instalar</button><button id="share-app" class="alt">Compartilhar app</button></div><small id="app-status" role="status"></small></section>
 <section id="editor" hidden><h1>Mandar uma notinha</h1><form id="form"><label for="mode">Tipo de mensagem</label><select id="mode"><option value="own">Escrever minha notinha</option><option value="random">Sortear por tema</option></select><div id="custom"><label for="body">Sua mensagem</label><textarea id="body" rows="4" maxlength="400" required></textarea></div><div id="themes" hidden><label for="theme">Tema</label><select id="theme"></select></div><label for="signature">Assinatura (opcional)</label><input id="signature" maxlength="60"><button>Conferir cartão</button></form>
-<div id="preview" class="paper" hidden><a id="invite-link" class="sealed-invite"><img src="periquito-realejo.jpg" alt=""><span><small>REALEJO</small><strong>Tem uma mensagem para você</strong></span></a><details id="private-preview"><summary>Conferir minha mensagem</summary><p id="sample" class="message"></p><p id="sampleSign"></p></details><button id="share">Enviar notinha</button><button id="copy" class="alt">Copiar link</button><input id="link" aria-label="Endereço da notinha" readonly hidden><small id="status" role="status"></small></div></section>
+<div id="preview" class="paper" hidden><a id="invite-link" class="sealed-invite"><img src="periquito-realejo.jpg" alt=""><span><small>REALEJO</small><strong>Tem uma mensagem para você</strong></span></a><details id="private-preview"><summary>Conferir minha mensagem</summary><p id="sample" class="message"></p><p id="sampleSign"></p></details><button id="share">Enviar notinha</button><button id="share-interactive" class="alt">Enviar link interativo</button><button id="copy" class="alt">Copiar link</button><input id="link" aria-label="Endereço da notinha" readonly hidden><small id="status" role="status"></small></div></section>
 <section id="receive" hidden><h1 id="greeting">Tem uma notinha para você!</h1><p id="hint">Gire a manivela para o periquito entregar seu bilhete.</p><button id="turn">Girar a manivela</button><button id="unfold" hidden>✉️ Abrir a notinha</button><div id="paper" class="paper" hidden><div class="note-brand"><img src="periquito-realejo.jpg" alt="" width="58" height="58"><span>REALEJO</span></div><p id="message" class="message"></p><p id="signed"></p><p class="note-invite">Crie uma notinha e deixe o periquito entregar.</p></div><div id="note-tools" hidden><button id="share-note">Compartilhar imagem</button><button id="save-note" class="alt">Salvar imagem</button><button id="print-note" class="alt">Imprimir</button></div><small id="note-status" role="status"></small><button id="reply" class="alt" hidden>Mandar uma notinha de volta</button></section></div></main>
 <script>
 const el=id=>document.getElementById(id);
@@ -162,8 +162,8 @@ el('compose').onclick=el('reply').onclick=compose;
 el('form').oninput=()=>{const own=el('mode').value==='own';el('body').required=own;el('custom').hidden=!own;el('themes').hidden=own;el('preview').hidden=true;el('body').setCustomValidity('')};
 el('form').onsubmit=e=>{e.preventDefault();const body=el('body').value;if(el('mode').value==='own'&&!body.trim()){el('body').setCustomValidity('Escreva uma mensagem.');el('body').reportValidity();return}
 const sign=el('signature').value.trim(),n=el('mode').value==='own'?{body,sign}:{catalog:2,theme:el('theme').value,seed:crypto.getRandomValues(new Uint32Array(1))[0],sign};
-const url=new URL('./?realejo=3',location.href);url.hash='n='+encode(n);el('link').value=url.href;el('link').hidden=true;el('private-preview').open=false;el('invite-link').href=url.href;el('sample').textContent=n.body??'O periquito vai tirar uma mensagem de '+n.theme.toLowerCase()+'.';el('sampleSign').textContent=sign;el('status').textContent='';el('preview').hidden=false;el('share').focus()};
-el('share').onclick=async()=>{if(!navigator.share)return el('copy').click();try{await navigator.share({title:'Tem uma mensagem para você',url:el('link').value})}catch(e){if(e.name!=='AbortError')el('copy').click()}};
+const url=new URL('./?realejo=3',location.href);url.hash='n='+encode(n);invitationNote=n;const pool=expandedNotes[n.theme];invitationTask=buildNoteImage(n.body??pool[n.seed%pool.length],n.sign).catch(()=>null);el('link').value=url.href;el('link').hidden=true;el('private-preview').open=false;el('invite-link').href=url.href;el('sample').textContent=n.body??'O periquito vai tirar uma mensagem de '+n.theme.toLowerCase()+'.';el('sampleSign').textContent=sign;el('status').textContent='';el('preview').hidden=false;el('share').focus()};
+el('share-interactive').onclick=async()=>{if(!navigator.share)return el('copy').click();try{await navigator.share({title:'Tem uma mensagem para você',url:el('link').value})}catch(e){if(e.name!=='AbortError')el('copy').click()}};
 el('copy').onclick=async()=>{try{await navigator.clipboard.writeText(el('link').value);el('status').textContent='Link copiado.'}catch{el('link').hidden=false;el('link').focus();el('link').select();el('status').textContent='Copie o link selecionado.'}};
 function receive(n,daily=false){note=n;screen('receive');el('greeting').textContent=daily?'Sua notinha do dia':'Tem uma notinha para você!'}
 el('daily').onclick=()=>{const day=Math.floor((Date.now()-new Date().getTimezoneOffset()*60000)/86400000);receive({body:dailyNotes[((day%dailyNotes.length)+dailyNotes.length)%dailyNotes.length],sign:''},true);el('turn').focus()};
@@ -214,21 +214,16 @@ function wrappedLines(ctx,text,maxWidth){
   }
   return rows;
 }
-async function prepareNoteImage(){
-  const share=el('share-note'),save=el('save-note');
-  share.disabled=true;
-  save.disabled=true;
-  el('note-status').textContent='';
-  try{
+async function buildNoteImage(message,signatureText){
     const portrait=el('paper').querySelector('img');
     await portrait.decode();
     const canvas=document.createElement('canvas');
     canvas.width=1080;
     const ctx=canvas.getContext('2d');
     ctx.font='49px Georgia, serif';
-    const rows=wrappedLines(ctx,el('message').textContent,888);
+    const rows=wrappedLines(ctx,message,888);
     ctx.font='italic 35px Georgia, serif';
-    const signature=el('signed').hidden?[]:wrappedLines(ctx,el('signed').textContent,888);
+    const signature=signatureText?wrappedLines(ctx,signatureText,888):[];
     canvas.height=Math.max(680,340+rows.length*65+signature.length*48);
     const gradient=ctx.createLinearGradient(0,0,1080,canvas.height);
     gradient.addColorStop(0,'#343125');
@@ -259,10 +254,40 @@ async function prepareNoteImage(){
     ctx.fillText('Crie uma notinha e deixe o periquito entregar.',96,canvas.height-91);
     ctx.fillStyle='#d0bd94';
     ctx.font='20px Georgia, serif';
-    ctx.fillText(location.host,96,canvas.height-56);
+
     const blob=await new Promise(resolve=>canvas.toBlob(resolve,'image/png'));
     if(!blob)throw Error();
-    noteImage=new File([blob],'notinha-realejo.png',{type:'image/png'});
+    return new File([blob],'notinha-realejo.png',{type:'image/png'});
+
+}
+let invitationNote, invitationTask;
+el('share').onclick=async()=>{
+  if(!invitationTask){
+    const n=invitationNote;
+    const pool=expandedNotes[n.theme];
+    invitationTask=buildNoteImage(n.body??pool[n.seed%pool.length],n.sign).catch(()=>null);
+  }
+  const file=await invitationTask;
+  if(!file){el('status').textContent='Cartão indisponível. Use Enviar link interativo.';return}
+  const payload={files:[file]};
+  if(navigator.canShare?.(payload)){
+    try{await navigator.share(payload);return}catch(error){if(error.name==='AbortError')return}
+  }
+  const url=URL.createObjectURL(file);
+  const link=document.createElement('a');
+  link.href=url;
+  link.download=file.name;
+  link.click();
+  setTimeout(()=>URL.revokeObjectURL(url),30000);
+  el('status').textContent='Cartão salvo para compartilhar.';
+};
+async function prepareNoteImage(){
+  const share=el('share-note'),save=el('save-note');
+  share.disabled=true;
+  save.disabled=true;
+  el('note-status').textContent='';
+  try{
+    noteImage=await buildNoteImage(el('message').textContent,el('signed').textContent);
     share.disabled=false;
     save.disabled=false;
   }catch{
