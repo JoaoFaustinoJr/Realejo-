@@ -1,4 +1,4 @@
-<!doctype html><html lang="pt-BR"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Realejo — Tem uma notinha para você!</title>
+<!doctype html><html lang="pt-BR"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="manifest" href="manifest.webmanifest"><link rel="icon" type="image/png" href="icon-192.png"><link rel="apple-touch-icon" href="icon-192.png"><meta name="theme-color" content="#17241f"><title>Realejo — Tem uma notinha para você!</title>
 <meta name="description" content="Realejo · Bilhetes surpresa para compartilhar.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Realejo">
@@ -54,11 +54,11 @@ textarea,input,select{background:#1c2121;border-color:#6b5d46;color:var(--ink)}
 .vines::before,.vines::after{content:"❧";opacity:.9}.vines::after{transform:scaleX(-1)}
 .stage video{animation:film-in .18s ease-out}@keyframes film-in{from{opacity:0}to{opacity:1}}
 @media(prefers-reduced-motion:reduce){.stage video{animation:none}}
-</style>
-<header><span class="brand"><span class="seal" aria-hidden="true">✉</span>REALEJO</span><button id="sound" class="alt" aria-pressed="false">Ligar som</button></header>
+.app-mark{border-radius:8px}.app-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}.app-actions button{margin:0;font-size:.92rem}</style>
+<header><span class="brand"><img class="app-mark" src="icon-192.png" width="34" height="34" alt="">REALEJO</span><button id="sound" class="alt" aria-pressed="false">Ligar som</button></header>
 <audio id="ambient" src="valsa-do-realejo.mp3" loop preload="none"></audio>
 <main><div class="stage" id="stage" aria-hidden="true"><video id="birdClip" src="periquito-entrega-nouveau.mp4" muted playsinline preload="metadata" hidden></video><span class="vines" aria-hidden="true"></span><span class="delivery">✉ Bilhete entregue</span></div>
-<div><section id="home"><h1>Uma notinha<br>para você.</h1><p>Escreva a notinha. O periquito faz a entrega.</p><div class="actions"><button id="compose">Mandar uma notinha</button><button id="daily" class="alt">Tirar minha notinha do dia</button></div></section>
+<div><section id="home"><h1>Uma notinha<br>para você.</h1><p>Escreva a notinha. O periquito faz a entrega.</p><div class="actions"><button id="compose">Mandar uma notinha</button><button id="daily" class="alt">Tirar minha notinha do dia</button></div><div class="app-actions"><button id="install-app" class="alt">Instalar</button><button id="share-app" class="alt">Compartilhar app</button></div><small id="app-status" role="status"></small></section>
 <section id="editor" hidden><h1>Mandar uma notinha</h1><form id="form"><label for="mode">Tipo de mensagem</label><select id="mode"><option value="own">Escrever minha notinha</option><option value="random">Sortear por tema</option></select><div id="custom"><label for="body">Sua mensagem</label><textarea id="body" rows="4" maxlength="400" required></textarea></div><div id="themes" hidden><label for="theme">Tema</label><select id="theme"></select></div><label for="signature">Assinatura (opcional)</label><input id="signature" maxlength="60"><button>Conferir cartão</button></form>
 <div id="preview" class="paper" hidden><img class="card-image" src="cartao-periquito.jpg" alt="Realejo — Tem uma notinha para você!"><a id="invite-link" style="color:inherit;font-weight:bold">Realejo_notas e mensagens exclusivas</a><p id="sample" class="message"></p><p id="sampleSign"></p><button id="share">Compartilhar link</button><button id="copy" class="alt">Copiar link</button><input id="link" aria-label="Endereço da notinha" readonly hidden><small id="status" role="status"></small></div></section>
 <section id="receive" hidden><h1 id="greeting">Tem uma notinha para você!</h1><p id="hint">Gire a manivela para o periquito entregar seu bilhete.</p><button id="turn">Girar a manivela</button><button id="unfold" hidden>✉️ Abrir a notinha</button><div id="paper" class="paper" hidden><div class="note-brand"><img src="periquito-realejo.jpg" alt="" width="58" height="58"><span>REALEJO</span></div><p id="message" class="message"></p><p id="signed"></p><p class="note-invite">Crie uma notinha e deixe o periquito entregar.</p></div><div id="note-tools" hidden><button id="share-note">Compartilhar imagem</button><button id="save-note" class="alt">Salvar imagem</button><button id="print-note" class="alt">Imprimir</button></div><small id="note-status" role="status"></small><button id="reply" class="alt" hidden>Mandar uma notinha de volta</button></section></div></main>
@@ -288,4 +288,27 @@ el('share-note').onclick=async()=>{
   el('note-status').textContent='Imagem salva para você compartilhar.';
 };
 if(location.hash.startsWith('#n=')){try{receive(decode(location.hash.slice(3)))}catch{el('home').querySelector('p').textContent='Este link de notinha está incompleto. Você pode criar outro cartão.'}}
+let installPrompt;
+const installed=()=>matchMedia('(display-mode: standalone)').matches||navigator.standalone===true;
+el('install-app').hidden=installed();
+window.addEventListener('beforeinstallprompt',event=>{event.preventDefault();installPrompt=event});
+window.addEventListener('appinstalled',()=>{installPrompt=null;el('install-app').hidden=true});
+el('install-app').onclick=async()=>{
+  if(installPrompt){
+    const prompt=installPrompt;
+    installPrompt=null;
+    try{await prompt.prompt();return}catch{}
+  }
+  el('app-status').textContent=/iPad|iPhone|iPod/.test(navigator.userAgent)
+    ? 'No Safari, toque em Compartilhar e depois em Adicionar à Tela de Início.'
+    : 'Abra no navegador e use o menu ⋮ para escolher Instalar app ou Adicionar à tela inicial.';
+};
+el('share-app').onclick=async()=>{
+  const url=new URL('./',location.href).href;
+  const title='Realejo · Notas e mensagens exclusivas';
+  try{if(navigator.share){await navigator.share({title,url});return}}catch(error){if(error.name==='AbortError')return}
+  try{await navigator.clipboard.writeText(url);el('app-status').textContent='Link do Realejo copiado.'}
+  catch{const link=document.createElement('a');link.href=url;link.textContent=url;el('app-status').replaceChildren(link)}
+};
+if('serviceWorker' in navigator)navigator.serviceWorker.register('./sw.js').catch(()=>{});
 </script></html>
