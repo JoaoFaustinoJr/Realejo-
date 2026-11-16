@@ -1,4 +1,4 @@
-<!doctype html><html lang="pt-BR"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="manifest" href="manifest.webmanifest"><link rel="icon" type="image/png" href="icon-192.png"><link rel="apple-touch-icon" href="icon-192.png"><meta name="theme-color" content="#17241f"><title>Realejo — Tem uma notinha para você!</title>
+<!doctype html><html lang="pt-BR"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="manifest" href="manifest.webmanifest"><link rel="icon" type="image/png" href="/Realejo-/icon-192.png?v=periquito-1" sizes="192x192"><link rel="apple-touch-icon" href="/Realejo-/icon-192.png?v=periquito-1"><meta name="theme-color" content="#17241f"><title>Realejo — Tem uma notinha para você!</title>
 <meta name="description" content="Realejo · Bilhetes surpresa para compartilhar.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Realejo">
@@ -162,7 +162,7 @@ el('compose').onclick=el('reply').onclick=compose;
 el('form').oninput=()=>{const own=el('mode').value==='own';el('body').required=own;el('custom').hidden=!own;el('themes').hidden=own;el('preview').hidden=true;el('body').setCustomValidity('')};
 el('form').onsubmit=e=>{e.preventDefault();const body=el('body').value;if(el('mode').value==='own'&&!body.trim()){el('body').setCustomValidity('Escreva uma mensagem.');el('body').reportValidity();return}
 const sign=el('signature').value.trim(),n=el('mode').value==='own'?{body,sign}:{catalog:2,theme:el('theme').value,seed:crypto.getRandomValues(new Uint32Array(1))[0],sign};
-const url=new URL('./?realejo=4',location.href);url.hash='n='+encode(n);prepareInvitationCard();el('link').value=url.href;el('link').hidden=true;el('private-preview').open=false;el('invite-link').href=url.href;el('sample').textContent=n.body??'O periquito vai tirar uma mensagem de '+n.theme.toLowerCase()+'.';el('sampleSign').textContent=sign;el('status').textContent='';el('preview').hidden=false;el('invite-link').focus()};
+const url=new URL('./?realejo=5',location.href);url.hash='n='+encode(n);prepareInvitationCard();el('link').value=url.href;el('link').hidden=true;el('private-preview').open=false;el('invite-link').href=url.href;el('sample').textContent=n.body??'O periquito vai tirar uma mensagem de '+n.theme.toLowerCase()+'.';el('sampleSign').textContent=sign;el('status').textContent='';el('preview').hidden=false;el('invite-link').focus()};
 el('share-interactive').onclick=async()=>{if(!navigator.share)return el('copy').click();try{await navigator.share({title:'Tem uma mensagem para você',url:el('link').value})}catch(e){if(e.name!=='AbortError')el('copy').click()}};
 el('copy').onclick=async()=>{try{await navigator.clipboard.writeText(el('link').value);el('status').textContent='Link copiado.'}catch{el('link').hidden=false;el('link').focus();el('link').select();el('status').textContent='Copie o link selecionado.'}};
 function receive(n,daily=false){note=n;screen('receive');el('greeting').textContent=daily?'Sua notinha do dia':'Tem uma notinha para você!'}
@@ -362,7 +362,7 @@ el('install-app').onclick=async()=>{
     : 'Abra no navegador e use o menu ⋮ para escolher Instalar app ou Adicionar à tela inicial.';
 };
 el('share-app').onclick=async()=>{
-  const url=new URL('./?realejo=4',location.href).href;
+  const url=new URL('./?realejo=5',location.href).href;
   const title='Realejo · Notas e mensagens exclusivas';
   try{if(navigator.share){await navigator.share({title,url});return}}catch(error){if(error.name==='AbortError')return}
   try{await navigator.clipboard.writeText(url);el('app-status').textContent='Link do Realejo copiado.'}
