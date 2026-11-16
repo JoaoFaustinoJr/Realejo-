@@ -109,8 +109,8 @@ const dailyNotes=[
 ];
 for(const name of Object.keys(expandedNotes))el('theme').add(new Option(name,name));
 function screen(id){for(const name of ['home','editor','receive'])el(name).hidden=name!==id}
-function encode(note){return btoa(Array.from(new TextEncoder().encode(JSON.stringify(note)),n=>String.fromCharCode(n)).join('')).replaceAll('+','-').replaceAll('/','_').replace(/=+$/,'')}
-function decode(code){if(code.length>4500)throw Error();const bytes=Uint8Array.from(atob(code.replaceAll('-','+').replaceAll('_','/')),c=>c.charCodeAt(0));const n=JSON.parse(new TextDecoder().decode(bytes));if(typeof n.sign!=='string'||n.sign.length>60||!(typeof n.body==='string'&&n.body.trim()&&n.body.length<=400||Object.hasOwn(n.catalog===2?expandedNotes:notes,n.theme)&&Number.isInteger(n.seed)&&n.seed>=0))throw Error();return n}
+function encode(note){return btoa(Array.from(new TextEncoder().encode(JSON.stringify(typeof note.body==='string'?[note.body,note.sign]:[note.theme,note.seed,note.sign])),n=>String.fromCharCode(n)).join('')).replaceAll('+','-').replaceAll('/','_').replace(/=+$/,'')}
+function decode(code){if(code.length>4500)throw Error();const bytes=Uint8Array.from(atob(code.replaceAll('-','+').replaceAll('_','/')),c=>c.charCodeAt(0));const data=JSON.parse(new TextDecoder().decode(bytes));const n=Array.isArray(data)?data.length===2?{body:data[0],sign:data[1]}:data.length===3?{catalog:2,theme:data[0],seed:data[1],sign:data[2]}:{}:data;if(typeof n.sign!=='string'||n.sign.length>60||!(typeof n.body==='string'&&n.body.trim()&&n.body.length<=400||Object.hasOwn(n.catalog===2?expandedNotes:notes,n.theme)&&Number.isInteger(n.seed)&&n.seed>=0))throw Error();return n}
 let note, audio, effectGain, duckTimer;
 const ambient=el('ambient');
 const sound=el('sound');
@@ -162,7 +162,7 @@ el('compose').onclick=el('reply').onclick=compose;
 el('form').oninput=()=>{const own=el('mode').value==='own';el('body').required=own;el('custom').hidden=!own;el('themes').hidden=own;el('preview').hidden=true;el('body').setCustomValidity('')};
 el('form').onsubmit=e=>{e.preventDefault();const body=el('body').value;if(el('mode').value==='own'&&!body.trim()){el('body').setCustomValidity('Escreva uma mensagem.');el('body').reportValidity();return}
 const sign=el('signature').value.trim(),n=el('mode').value==='own'?{body,sign}:{catalog:2,theme:el('theme').value,seed:crypto.getRandomValues(new Uint32Array(1))[0],sign};
-const url=new URL('./?realejo=8',location.href);url.hash='n='+encode(n);prepareInvitationCard();el('link').value=url.href;el('link').hidden=true;el('private-preview').open=false;el('invite-link').href=url.href;el('sample').textContent=n.body??'O periquito vai tirar uma mensagem de '+n.theme.toLowerCase()+'.';el('sampleSign').textContent=sign;el('status').textContent='';el('preview').hidden=false;el('invite-link').focus()};
+const url=new URL('./',location.href);url.hash='n='+encode(n);prepareInvitationCard();el('link').value=url.href;el('link').hidden=true;el('private-preview').open=false;el('invite-link').href=url.href;el('sample').textContent=n.body??'O periquito vai tirar uma mensagem de '+n.theme.toLowerCase()+'.';el('sampleSign').textContent=sign;el('status').textContent='';el('preview').hidden=false;el('invite-link').focus()};
 el('share-interactive').onclick=async()=>{
   const url=el('link').value;
   const title='Abra sua notinha 🎵';
@@ -231,7 +231,7 @@ async function buildNoteImage(message,signatureText){
     const rows=wrappedLines(ctx,message,888);
     ctx.font='italic 35px Georgia, serif';
     const signature=signatureText?wrappedLines(ctx,signatureText,888):[];
-    canvas.height=Math.max(680,340+rows.length*65+signature.length*48);
+    canvas.height=Math.max(680,270+rows.length*65+signature.length*48);
     const gradient=ctx.createLinearGradient(0,0,1080,canvas.height);
     gradient.addColorStop(0,'#343125');
     gradient.addColorStop(1,'#171e1d');
@@ -257,10 +257,6 @@ async function buildNoteImage(message,signatureText){
     ctx.fillStyle='#e2c68f';
     ctx.font='italic 35px Georgia, serif';
     signature.forEach((row,i)=>ctx.fillText(row,96,294+rows.length*65+i*48));
-    ctx.font='23px Georgia, serif';
-    ctx.fillText('Crie uma notinha e deixe o periquito entregar.',96,canvas.height-91);
-    ctx.fillStyle='#d0bd94';
-    ctx.font='20px Georgia, serif';
 
     const blob=await new Promise(resolve=>canvas.toBlob(resolve,'image/png'));
     if(!blob)throw Error();
