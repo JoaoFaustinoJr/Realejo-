@@ -83,14 +83,23 @@ textarea,input,select{background:#1c2121;border-color:#6b5d46;color:var(--ink)}
 .app-credit{display:flex;justify-content:center;align-items:baseline;flex-wrap:wrap;gap:3px 8px;border-top:0;padding:8px 16px 20px;color:#b0a590}
 .app-credit .credit-family,.app-credit small{font-size:.7rem;margin:0}
 .app-credit .tangram-mark{width:9px;height:9px}
+main.receiving{grid-template-columns:minmax(0,1fr);max-width:790px}
+body:not(.note-open) main.receiving > :last-child{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+#stage-actions{position:absolute;inset:auto 10px 10px;z-index:3;display:grid;justify-items:center;gap:10px;text-align:center;padding:38px 12px 15px;background:linear-gradient(transparent,#101b16ee 65%);border-radius:0 0 7px 7px}
+#stage-actions[hidden]{display:none}
+#stage-actions.delivering{opacity:0;pointer-events:none}
+#stage-actions h1{margin:0;max-width:19ch;color:#fff1d1;font-size:clamp(21px,5vw,38px);line-height:1.1;text-shadow:0 2px 4px #000}
+#stage-actions button{margin:0;min-height:44px;padding:8px 16px;font-size:clamp(.85rem,3.8vw,1.05rem)}
+.stage-status{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);margin:0}
+@media(max-width:720px){main.receiving .stage{aspect-ratio:1.16}}
 </style>
 <header><span class="brand"><img class="app-mark" src="icon-192.png" width="34" height="34" alt="">REALEJO</span><button id="sound" class="alt" aria-pressed="false">Ligar som</button></header>
 <audio id="ambient" src="valsa-do-realejo.mp3" loop preload="none"></audio>
-<main><div class="stage" id="stage" aria-hidden="true"><video id="birdClip" src="periquito-entrega-nouveau.mp4" muted playsinline preload="metadata" hidden></video><span class="vines" aria-hidden="true"></span><span class="delivery">✉ Bilhete entregue</span></div>
+<main><div class="stage" id="stage"><video id="birdClip" aria-hidden="true" src="periquito-entrega-nouveau.mp4" muted playsinline preload="metadata" hidden></video><span class="vines" aria-hidden="true"></span><div id="stage-actions" hidden><h1 id="greeting">Tenho uma mensagem para você</h1><p id="hint" class="stage-status" role="status"></p><button id="turn">Gire a manivela</button><button id="unfold" hidden>Abrir a notinha</button></div></div>
 <div><section id="home"><h1>Uma notinha<br>para você.</h1><p>Escreva a notinha. O periquito faz a entrega.</p><div class="actions"><button id="compose">Mandar uma notinha</button><button id="daily" class="alt">Tirar minha notinha do dia</button></div><div class="app-actions"><button id="install-app" class="alt">Instalar</button><button id="share-app" class="alt">Compartilhar app</button></div><small id="app-status" role="status"></small></section>
 <section id="editor" hidden><h1>Mandar uma notinha</h1><form id="form"><label for="mode">Tipo de mensagem</label><select id="mode"><option value="own">Escrever minha notinha</option><option value="random">Sortear por tema</option></select><div id="custom"><label for="body">Sua mensagem</label><textarea id="body" rows="4" maxlength="400" required></textarea></div><div id="themes" hidden><label for="theme">Tema</label><select id="theme"></select></div><label for="signature">Assinatura (opcional)</label><input id="signature" maxlength="60"><button>Conferir cartão</button></form>
 <div id="preview" class="paper" hidden><a id="invite-link" class="sealed-invite"><img src="periquito-realejo.jpg" alt=""><span><small>REALEJO</small><strong>Tem uma mensagem para você</strong></span></a><details id="private-preview"><summary>Conferir minha mensagem</summary><p id="sample" class="message"></p><p id="sampleSign"></p></details><button id="share-interactive">Enviar esta notinha</button><button id="reroll" type="button" class="alt" hidden>Sortear outra</button><button id="copy" class="alt">Copiar link</button><button id="share" class="alt" disabled>Compartilhar só a imagem</button><input id="link" aria-label="Endereço da notinha" readonly hidden><small id="status" role="status"></small></div></section>
-<section id="receive" hidden><h1 id="greeting">Tem uma mensagem para você</h1><p id="hint">Gire a manivela para o periquito entregar seu bilhete.</p><button id="turn">Girar a manivela</button><button id="unfold" hidden>✉️ Abrir a notinha</button><div id="paper" class="paper" hidden><div class="note-brand"><img src="periquito-realejo.jpg" alt="" width="58" height="58"><span>REALEJO</span></div><p id="message" class="message"></p><p id="signed"></p></div><button id="reply" hidden>Responder com uma notinha</button><div id="received-install" hidden><button id="install-note" class="alt" type="button">Instalar Realejo</button><small id="install-note-status" role="status"></small></div><details id="note-options" hidden><summary>Opções da notinha</summary><div id="note-tools"><button id="share-note" class="alt">Compartilhar imagem</button><button id="save-note" class="alt">Salvar imagem</button><button id="print-note" class="alt">Imprimir</button></div></details><small id="note-status" role="status"></small></section></div></main><footer class="app-credit"><span class="credit-family"><span class="tangram-mark" aria-hidden="true"></span>Família Tangram</span><small>· Criado por Professor João Faustino Júnior</small></footer>
+<section id="receive" hidden><div id="paper" class="paper" hidden><div class="note-brand"><img src="periquito-realejo.jpg" alt="" width="58" height="58"><span>REALEJO</span></div><p id="message" class="message"></p><p id="signed"></p></div><button id="reply" hidden>Responder com uma notinha</button><div id="received-install" hidden><button id="install-note" class="alt" type="button">Instalar Realejo</button><small id="install-note-status" role="status"></small></div><details id="note-options" hidden><summary>Opções da notinha</summary><div id="note-tools"><button id="share-note" class="alt">Compartilhar imagem</button><button id="save-note" class="alt">Salvar imagem</button><button id="print-note" class="alt">Imprimir</button></div></details><small id="note-status" role="status"></small></section></div></main><footer class="app-credit"><span class="credit-family"><span class="tangram-mark" aria-hidden="true"></span>Família Tangram</span><small>· Criado por Professor João Faustino Júnior</small></footer>
 <script>
 const el=id=>document.getElementById(id);
 const notes={
@@ -225,7 +234,7 @@ const dailyNotes=[
  'Lembre de alguém que lhe ensinou algo com paciência. Talvez seja um bom dia para agradecer.'
 ];
 for(const name of Object.keys(currentNotes))el('theme').add(new Option(name,name));
-function screen(id){for(const name of ['home','editor','receive'])el(name).hidden=name!==id}
+function screen(id){for(const name of ['home','editor','receive'])el(name).hidden=name!==id;el('stage-actions').hidden=id!=='receive';el('stage').parentElement.classList.toggle('receiving',id==='receive')}
 function encode(note){return btoa(Array.from(new TextEncoder().encode(JSON.stringify(typeof note.body==='string'?[note.body,note.sign]:[note.catalog,note.theme,note.seed,note.sign])),n=>String.fromCharCode(n)).join('')).replaceAll('+','-').replaceAll('/','_').replace(/=+$/,'')}
 function decode(code){if(code.length>4500)throw Error();const bytes=Uint8Array.from(atob(code.replaceAll('-','+').replaceAll('_','/')),c=>c.charCodeAt(0));const data=JSON.parse(new TextDecoder().decode(bytes));const n=Array.isArray(data)?data.length===2?{body:data[0],sign:data[1]}:data.length===3?{catalog:2,theme:data[0],seed:data[1],sign:data[2]}:data.length===4&&data[0]===3?{catalog:3,theme:data[1],seed:data[2],sign:data[3]}:{}:data;if(typeof n.sign!=='string'||n.sign.length>60||!(typeof n.body==='string'&&n.body.trim()&&n.body.length<=400||Object.hasOwn(notePool(n.catalog),n.theme)&&Number.isInteger(n.seed)&&n.seed>=0))throw Error();return n}
 let note, audio, effectGain, duckTimer;
@@ -327,10 +336,11 @@ el('share-interactive').onclick=async()=>{
   catch(error){if(error.name!=='AbortError')el('copy').click()}
 };
 el('copy').onclick=async()=>{try{await navigator.clipboard.writeText(el('link').value);el('status').textContent='Link copiado.'}catch{el('link').hidden=false;el('link').focus();el('link').select();el('status').textContent='Copie o link selecionado.'}};
-function receive(n,daily=false){note=n;screen('receive');el('greeting').textContent=daily?'Sua notinha do dia':'Tem uma mensagem para você'}
+function receive(n,daily=false){note=n;screen('receive');el('greeting').textContent=daily?'Sua notinha do dia':'Tenho uma mensagem para você'}
 el('daily').onclick=()=>{const day=Math.floor((Date.now()-new Date().getTimezoneOffset()*60000)/86400000);receive({body:dailyNotes[((day%dailyNotes.length)+dailyNotes.length)%dailyNotes.length],sign:''},true);el('turn').focus()};
 el('turn').onclick=()=>{
   el('turn').disabled=true;
+  el('stage-actions').classList.add('delivering');
   el('hint').textContent='O periquito está buscando sua notinha…';
   melody();
   const clip=el('birdClip');
@@ -341,7 +351,8 @@ el('turn').onclick=()=>{
     clip.removeEventListener('ended',delivered);
     clip.hidden=true;
     clip.pause();
-    el('stage').classList.add('show');
+    el('stage-actions').classList.remove('delivering');
+    el('greeting').hidden=true;
     el('turn').hidden=true;
     el('unfold').hidden=false;
     el('hint').textContent='O periquito trouxe um papel dobrado.';
