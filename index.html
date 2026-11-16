@@ -95,12 +95,21 @@ body:not(.note-open) main.receiving > :last-child{position:absolute;width:1px;he
   body:not(.note-open) main.receiving{padding:12px 10px 20px}
   main.receiving .stage{
     aspect-ratio:auto;
-    height:clamp(340px,calc(100svh - 126px),760px);
+    height:clamp(330px, min(68svh, 128vw), 580px);
     max-height:none;
-    background-position:58% center;
+    background-color:#101b16;
+    background-size:contain;
+    background-position:center top;
   }
-  main.receiving .stage video{object-position:58% center}
-  main.receiving #stage-actions{padding-bottom:20px}
+  main.receiving .stage video{
+    object-fit:contain;
+    object-position:center;
+    background:#101b16;
+  }
+  main.receiving #stage-actions{
+    padding-bottom:20px;
+    background:linear-gradient(transparent,#101b16 72%);
+  }
 }
 </style>
 <header><span class="brand"><img class="app-mark" src="icon-192.png" width="34" height="34" alt="">REALEJO</span><button id="sound" class="alt" aria-pressed="false">Ligar som</button></header>
