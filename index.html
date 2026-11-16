@@ -86,6 +86,86 @@ const expandedNotes={
  'Incentivo': ['Se hoje só der para fazer uma parte, já vale começar por ela.','Se precisar de companhia para dar o primeiro passo, me chama.','Leve o tempo que precisar. Eu continuo torcendo por você.','Quando bater a dúvida, lembre de uma coisa que hoje você faz e antes achava difícil.'],
  'Parabéns': ['Fiquei feliz com a notícia. Sei o quanto você trabalhou para chegar até aqui.','Tire um instante para comemorar. Você também merece aproveitar o que conquistou.','Bonito ver uma ideia sua ganhar forma. Parabéns por levar adiante.','Parabéns! Espero que você possa contar essa história com calma e um sorriso.']
 };
+const currentNotes={
+  "Carinho": [
+    "Só passei para dizer que gosto muito de ter você por perto.",
+    "Tem dias em que ouvir sua voz já melhora tudo.",
+    "Queria te dar um abraço agora. Vai este bilhete primeiro.",
+    "Pode guardar esta notinha para um dia em que precisar lembrar que é querido.",
+    "Gosto das nossas conversas, até das que começam sem assunto."
+  ],
+  "Bom dia": [
+    "Bom dia! Que a primeira notícia boa chegue antes de o café esfriar.",
+    "Que hoje dê tempo de almoçar sem pressa e rir de alguma bobagem.",
+    "Bom dia! Vim deixar meu oi antes que a correria leve a manhã.",
+    "Que apareça um motivo para você voltar para casa sorrindo hoje.",
+    "Bom dia! Se o café estiver bom, já temos por onde começar."
+  ],
+  "Gratidão": [
+    "Sua ajuda fez diferença. Eu queria te agradecer com calma.",
+    "Obrigado por me escutar até eu conseguir pôr as ideias em ordem.",
+    "Tem uma gentileza sua de que ainda me lembro com carinho.",
+    "Você tornou um dia difícil mais leve. Guardo isso comigo.",
+    "Que bom poder contar com você. Hoje eu quis dizer isso em voz alta."
+  ],
+  "Fé": [
+    "Que Deus te dê paz para o que hoje pesa e coragem para o próximo passo.",
+    "Pedi a Deus que te acompanhe hoje. Receba também meu abraço.",
+    "Que o Senhor te guarde na ida, na volta e em tudo o que acontecer entre elas.",
+    "Que você encontre um instante de silêncio para descansar o coração em Deus.",
+    "Hoje fiz uma oração por você. Que a paz de Cristo chegue aí."
+  ],
+  "Humor": [
+    "O periquito pediu desconto na passagem. Disse que já veio de avião.",
+    "Bilhete entregue no bico. A assinatura saiu meio bicada.",
+    "O periquito topou guardar segredo. Só pediu para contar para o poleiro.",
+    "Se você sorriu, ele já pode lançar a entrega como serviço concluído.",
+    "O periquito aceita elogios. Sementes também. Em dinheiro ele ainda se enrola."
+  ],
+  "Saudade": [
+    "Hoje quase te mandei um áudio só para ouvir o seu depois.",
+    "Senti falta daquelas conversas que começam cedo e acabam sem a gente perceber.",
+    "Tem uma história que guardei para te contar pessoalmente.",
+    "Hoje me bateu vontade de sentar com você e conversar sem olhar a hora.",
+    "Quando a gente se vir, vou querer um abraço demorado."
+  ],
+  "Aniversário": [
+    "Feliz aniversário! Que hoje tenha gente querida por perto e conversa boa depois do bolo.",
+    "Que seu próximo ano te dê mais dias que você queira repetir. Feliz aniversário!",
+    "O periquito trouxe o parabéns. O abraço fica por minha conta quando a gente se encontrar.",
+    "Feliz aniversário! Que sobre tempo para comemorar do seu jeito.",
+    "Hoje eu queria estar aí para cantar parabéns e pegar o segundo pedaço de bolo."
+  ],
+  "Incentivo": [
+    "Faça o que cabe no dia de hoje. Amanhã a gente vê o resto.",
+    "Estou torcendo por você. Se quiser companhia, me chama.",
+    "Você pode começar pela parte que já sabe fazer.",
+    "Se der vontade de desistir hoje, descanse primeiro e decida depois.",
+    "Quando a dúvida apertar, lembra de algo que você aprendeu devagar e hoje faz com confiança."
+  ],
+  "Parabéns": [
+    "Fiquei feliz com a notícia. Tomara que você tenha tempo de comemorar hoje.",
+    "Foi bonito acompanhar o caminho até aqui. Parabéns pela conquista!",
+    "Parabéns! Quero ouvir essa história com todos os detalhes quando a gente se encontrar.",
+    "Que alegria ver sua ideia ganhar forma. Parabéns por levar adiante.",
+    "Espero que você pare um instante para curtir o que acabou de conquistar."
+  ],
+  "Amor": [
+    "Se eu pudesse escolher o melhor momento do dia, seria aquele em que você chega.",
+    "Gosto da vida que a gente vai fazendo nas coisas pequenas, um dia de cada vez.",
+    "Eu ainda sorrio quando aparece seu nome na tela.",
+    "Se sobrar um pedaço do seu dia, quero passar ele com você.",
+    "Te amo. Hoje me deu vontade de dizer antes de qualquer outro assunto."
+  ],
+  "Boa noite": [
+    "Boa noite. Que você consiga largar o peso do dia antes de deitar.",
+    "Durma bem. Amanhã eu quero saber como foi seu dia de hoje.",
+    "Que a noite seja tranquila e o despertador demore a tocar.",
+    "Passei para te desejar boa noite e deixar um abraço aqui.",
+    "Boa noite! Que você encontre sossego até nas coisas que ficaram para amanhã."
+  ]
+};
+function notePool(version){return version===3?currentNotes:version===2?expandedNotes:notes}
 const dailyNotes=[
  'Escolha uma coisa pequena para fazer com calma. Pode ser só tomar o primeiro café.',
  'Se lembrar de alguém hoje, diga. Às vezes a melhor hora de mandar um oi é a hora em que a pessoa vem à cabeça.',
@@ -109,10 +189,10 @@ const dailyNotes=[
  'De vez em quando, vale fazer um caminho diferente só para ver o que tem na outra rua.',
  'Lembre de alguém que lhe ensinou algo com paciência. Talvez seja um bom dia para agradecer.'
 ];
-for(const name of Object.keys(expandedNotes))el('theme').add(new Option(name,name));
+for(const name of Object.keys(currentNotes))el('theme').add(new Option(name,name));
 function screen(id){for(const name of ['home','editor','receive'])el(name).hidden=name!==id}
-function encode(note){return btoa(Array.from(new TextEncoder().encode(JSON.stringify(typeof note.body==='string'?[note.body,note.sign]:[note.theme,note.seed,note.sign])),n=>String.fromCharCode(n)).join('')).replaceAll('+','-').replaceAll('/','_').replace(/=+$/,'')}
-function decode(code){if(code.length>4500)throw Error();const bytes=Uint8Array.from(atob(code.replaceAll('-','+').replaceAll('_','/')),c=>c.charCodeAt(0));const data=JSON.parse(new TextDecoder().decode(bytes));const n=Array.isArray(data)?data.length===2?{body:data[0],sign:data[1]}:data.length===3?{catalog:2,theme:data[0],seed:data[1],sign:data[2]}:{}:data;if(typeof n.sign!=='string'||n.sign.length>60||!(typeof n.body==='string'&&n.body.trim()&&n.body.length<=400||Object.hasOwn(n.catalog===2?expandedNotes:notes,n.theme)&&Number.isInteger(n.seed)&&n.seed>=0))throw Error();return n}
+function encode(note){return btoa(Array.from(new TextEncoder().encode(JSON.stringify(typeof note.body==='string'?[note.body,note.sign]:[note.catalog,note.theme,note.seed,note.sign])),n=>String.fromCharCode(n)).join('')).replaceAll('+','-').replaceAll('/','_').replace(/=+$/,'')}
+function decode(code){if(code.length>4500)throw Error();const bytes=Uint8Array.from(atob(code.replaceAll('-','+').replaceAll('_','/')),c=>c.charCodeAt(0));const data=JSON.parse(new TextDecoder().decode(bytes));const n=Array.isArray(data)?data.length===2?{body:data[0],sign:data[1]}:data.length===3?{catalog:2,theme:data[0],seed:data[1],sign:data[2]}:data.length===4&&data[0]===3?{catalog:3,theme:data[1],seed:data[2],sign:data[3]}:{}:data;if(typeof n.sign!=='string'||n.sign.length>60||!(typeof n.body==='string'&&n.body.trim()&&n.body.length<=400||Object.hasOwn(notePool(n.catalog),n.theme)&&Number.isInteger(n.seed)&&n.seed>=0))throw Error();return n}
 let note, audio, effectGain, duckTimer;
 const ambient=el('ambient');
 const sound=el('sound');
@@ -163,7 +243,7 @@ function compose(){document.body.classList.remove('note-open');history.replaceSt
 el('compose').onclick=el('reply').onclick=compose;
 el('form').oninput=()=>{const own=el('mode').value==='own';el('body').required=own;el('custom').hidden=!own;el('themes').hidden=own;el('preview').hidden=true;el('body').setCustomValidity('')};
 el('form').onsubmit=e=>{e.preventDefault();const body=el('body').value;if(el('mode').value==='own'&&!body.trim()){el('body').setCustomValidity('Escreva uma mensagem.');el('body').reportValidity();return}
-const sign=el('signature').value.trim(),n=el('mode').value==='own'?{body,sign}:{catalog:2,theme:el('theme').value,seed:crypto.getRandomValues(new Uint32Array(1))[0],sign};
+const sign=el('signature').value.trim(),n=el('mode').value==='own'?{body,sign}:{catalog:3,theme:el('theme').value,seed:crypto.getRandomValues(new Uint32Array(1))[0],sign};
 const url=new URL('./?cartao=2',location.href);url.hash='n='+encode(n);prepareInvitationCard();el('link').value=url.href;el('link').hidden=true;el('private-preview').open=false;el('invite-link').href=url.href;el('sample').textContent=n.body??'O periquito vai tirar uma mensagem de '+n.theme.toLowerCase()+'.';el('sampleSign').textContent=sign;el('status').textContent='';el('preview').hidden=false;el('invite-link').focus()};
 el('share-interactive').onclick=async()=>{
   const text=el('link').value;
@@ -201,7 +281,7 @@ el('turn').onclick=()=>{
     fallback=setTimeout(delivered,1500);
   });
 };
-el('unfold').onclick=()=>{const pool=(note.catalog===2?expandedNotes:notes)[note.theme];el('message').textContent=note.body??pool[note.seed%pool.length];el('signed').textContent=note.sign;el('signed').hidden=!note.sign;document.body.classList.add('note-open');el('paper').hidden=false;el('note-tools').hidden=false;prepareNoteImage();el('paper').tabIndex=-1;el('paper').focus();el('unfold').hidden=true;el('hint').hidden=true;el('reply').hidden=false};
+el('unfold').onclick=()=>{const pool=notePool(note.catalog)[note.theme];el('message').textContent=note.body??pool[note.seed%pool.length];el('signed').textContent=note.sign;el('signed').hidden=!note.sign;document.body.classList.add('note-open');el('paper').hidden=false;el('note-tools').hidden=false;prepareNoteImage();el('paper').tabIndex=-1;el('paper').focus();el('unfold').hidden=true;el('hint').hidden=true;el('reply').hidden=false};
 let noteImage;
 function wrappedLines(ctx,text,maxWidth){
   const rows=[];
