@@ -1,0 +1,640 @@
+<!doctype html><html lang="pt-BR"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="manifest" href="manifest.webmanifest"><link rel="icon" type="image/png" href="/Realejo-/icon-192.png?v=periquito-1" sizes="192x192"><link rel="apple-touch-icon" href="/Realejo-/icon-192.png?v=periquito-1"><meta name="theme-color" content="#17241f"><title>Realejo — Tem uma mensagem para você</title>
+<meta name="description" content="Realejo · Bilhetes surpresa para compartilhar.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Realejo">
+<meta property="og:title" content="Tem uma mensagem para você">
+<meta property="og:description" content="Toque para abrir a notinha.">
+<meta property="og:image" content="https://joaofaustinojr.github.io/Realejo-/previa-notinha.jpg">
+<meta property="og:image:width" content="1000">
+<meta property="og:image:height" content="750">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:alt" content="Periquito verde com um bilhete dobrado no bico, pousado no realejo.">
+<meta name="twitter:card" content="summary_large_image">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-KXDY9J9N3V"></script>
+<script>
+window.dataLayer=window.dataLayer||[];
+function gtag(){window.dataLayer.push(arguments)}
+gtag('js',new Date());
+// O fragmento do endereço contém o bilhete e a assinatura.
+gtag('config','G-KXDY9J9N3V',{
+  page_location:location.origin+location.pathname,
+  page_referrer:document.referrer?new URL(document.referrer).origin:''
+});
+</script>
+<style>
+:root{color-scheme:light;--ink:#302219;--green:#173c30;--cream:#faf4e9;--line:#dacbb3}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 80% 0%,#fffaf0,transparent 57%),var(--cream);color:var(--ink);font:17px Georgia,serif}
+header{max-width:1160px;margin:auto;padding:15px 28px;min-height:72px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}
+.brand{display:inline-flex;align-items:center;gap:10px;letter-spacing:.14em;font-weight:bold;color:var(--green)}.seal{display:grid;place-items:center;width:30px;height:30px;border:1px solid #9d7840;border-radius:50%;font-size:16px;letter-spacing:0;color:#765325}
+main{max-width:1160px;margin:auto;padding:clamp(30px,6vw,85px) 28px;display:grid;grid-template-columns:minmax(0,1.14fr) minmax(0,1fr);gap:clamp(35px,6vw,85px);align-items:center}.stage{aspect-ratio:1.18;border-radius:14px;background:#162d25 url(periquito-realejo.jpg) center/cover no-repeat;position:relative;overflow:hidden;border:1px solid #837044;box-shadow:0 17px 40px #30221925}.stage::before{content:"";position:absolute;inset:9px;border:1px solid #e7c48666;border-radius:8px;pointer-events:none}.stage.spin{animation:lantern 1.65s ease-out}.delivery{position:absolute;bottom:18px;left:50%;transform:translate(-50%,12px);opacity:0;transition:.35s;background:#fff4dc;color:#57361e;padding:9px 16px;border-radius:20px;white-space:nowrap;font-size:14px}.show .delivery{opacity:1;transform:translate(-50%,0)}@keyframes lantern{35%{filter:brightness(1.19)}}
+h1{font-weight:500;font-size:clamp(42px,6vw,76px);letter-spacing:-.055em;line-height:.99;margin:0 0 18px}p{line-height:1.58;margin:0 0 19px}.actions{display:flex;gap:9px;flex-wrap:wrap}
+button,input,textarea,select{font:inherit}button{border:1px solid var(--green);border-radius:8px;padding:13px 17px;background:var(--green);color:#fff9e9;cursor:pointer;margin:4px 4px 4px 0;min-height:46px}button:hover{filter:brightness(1.15)}button.alt{background:transparent;color:var(--green);border-color:#658173}button:disabled{opacity:.55}.actions button,header button{margin:0}header button{min-height:39px;padding:8px 14px;font-size:15px;border-radius:24px}
+label{display:block;margin:14px 0 6px;font-size:15px;font-weight:bold}textarea,input,select{width:100%;padding:11px;border:1px solid #ac987c;border-radius:7px;background:#fffcf6;color:inherit}textarea{resize:vertical}form>button{margin-top:14px}.paper{background:linear-gradient(135deg,#fffcf3,#f6ead3);border:1px solid #d5bd92;border-radius:4px;box-shadow:3px 7px 0 #e8d8ba;padding:clamp(18px,4vw,30px);margin:15px 0;overflow-wrap:anywhere}.paper p:last-child{margin-bottom:0}.message{white-space:pre-wrap;font-size:1.16rem}.card-image{display:block;width:100%;border-radius:6px;margin:0 0 14px}#link{margin-top:8px}small{display:block;margin-top:6px}[hidden]{display:none!important}:focus-visible{outline:3px solid #aa582c;outline-offset:3px}
+@media(max-width:720px){header{padding:10px 19px;min-height:58px}main{grid-template-columns:1fr;padding:18px 18px 32px;gap:25px}.stage{aspect-ratio:1.37;max-height:390px}h1{font-size:clamp(40px,9.5vw,60px);margin-bottom:13px}.actions{display:grid;grid-template-columns:1fr}p{margin-bottom:15px}}
+@media(prefers-reduced-motion:reduce){.stage.spin{animation:none}.delivery{transition:none}}
+/* Paleta compartilhada entre a composição e a leitura. */
+:root{color-scheme:dark;--ink:#e9dbbf;--green:#d3b37a;--cream:#131619;--line:#3b352b;--muted:#bcb29e}
+body{min-height:100vh;background:radial-gradient(ellipse at 40% 20%,#23302b 0%,#181c1d 36%,#131619 74%);color:var(--ink)}
+header{border-color:var(--line)}.brand,.seal{color:var(--green)}.seal{border-color:#836a42}
+h1{color:#e2c68f}p{color:var(--muted)}
+.stage{border-color:#675638;box-shadow:0 16px 40px #0005}.stage::before{border-color:#bfa46d55}
+button{background:linear-gradient(145deg,#d8bc84,#b99556);color:#1e1912;border-color:#b99556;font-weight:600}
+button.alt{background:#1c2020;color:#dec28e;border-color:#6c593d}header button.alt{background:transparent}
+textarea,input,select{background:#1c2121;border-color:#6b5d46;color:var(--ink)}
+.paper{background:linear-gradient(145deg,#282820,#1b2020);border-color:#77623e;box-shadow:3px 6px 0 #131612}.paper p{color:var(--ink)}.paper strong{color:var(--green)}#signed,#sampleSign{color:var(--green)}
+.delivery{background:#28251d;color:#ecd5a5;border:1px solid #8b7147}
+:focus-visible{outline-color:#e4c88e}
+@media(max-width:720px){main{gap:22px}.stage{border-radius:12px}}
+.note-brand{display:flex;align-items:center;gap:11px;margin-bottom:19px;padding-bottom:13px;border-bottom:1px solid #77623e;color:#e2c68f;font:700 .8rem Georgia,serif;letter-spacing:.15em}.note-brand img{width:58px;height:58px;object-fit:cover;object-position:59% center;border-radius:50%;border:1px solid #a58954}
+.stage video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}.stage::before{z-index:1}.delivery{z-index:2}
+.note-open main{display:block;max-width:790px;padding-top:clamp(20px,5vw,50px)}
+.note-open .stage,.note-open #greeting{display:none}
+#paper{position:relative;border-color:#baa06d;background:radial-gradient(ellipse at top left,#323024,#1b2120 78%);padding:clamp(25px,6vw,56px);box-shadow:0 18px 55px #0007}
+#paper .message{font-size:clamp(1.34rem,4.5vw,2rem);line-height:1.45;margin:20px 0}
+#signed{white-space:pre-wrap;font-style:italic}
+#note-tools{display:flex;gap:8px;flex-wrap:wrap;margin-top:22px}
+#note-tools button{margin:0}
+@media print{
+  @page{margin:15mm}
+  html,body{color-scheme:light!important;background:#fff!important;color:#201d17!important}
+  body>header,.stage,#greeting,#hint,#turn,#unfold,#note-options,#note-status,#reply,#received-install,.app-credit{display:none!important}
+  .note-open main{display:block;max-width:none;padding:0}
+  #paper{background:#fff!important;color:#201d17!important;box-shadow:none;border:1px solid #9c8350;break-inside:avoid;margin:0}
+  #paper p,#paper .note-brand{color:#201d17!important}
+}
+.stage::before{inset:10px;border:1px solid #d0ac6c8c;border-radius:44% 44% 12px 12px / 18% 18% 12px 12px;box-shadow:0 0 0 3px #161b17aa;pointer-events:none}
+.vines{position:absolute;inset:16px;z-index:1;pointer-events:none;display:flex;justify-content:space-between;align-items:flex-end;color:#e0bd7b;text-shadow:0 1px 5px #000;font:clamp(22px,4vw,38px)/1 Georgia,serif}
+.vines::before,.vines::after{content:"❧";opacity:.9}.vines::after{transform:scaleX(-1)}
+.stage video{opacity:0;pointer-events:none;transition:opacity .24s ease-out}.stage video.is-visible{opacity:1}
+@media(prefers-reduced-motion:reduce){.stage video{transition:none}}
+.app-mark{border-radius:8px}.app-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}.app-actions button{margin:0;font-size:.92rem}.sealed-invite{display:block;position:relative;isolation:isolate;overflow:hidden;min-height:225px;aspect-ratio:1.55;border:1px solid #9e8253;border-radius:9px;color:#ffe6b0;text-decoration:none;margin-bottom:12px;background:#17241f}.sealed-invite img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}.sealed-invite::before{content:"";position:absolute;inset:0;background:linear-gradient(0deg,#101612 2%,#101612da 20%,transparent 72%);z-index:-1}.sealed-invite span{position:absolute;inset:auto 16px 16px}.sealed-invite small{letter-spacing:.22em;font-size:.66rem;margin-bottom:5px}.sealed-invite strong{display:block;font:500 clamp(1.2rem,4vw,1.9rem)/1.1 Georgia,serif}#private-preview{margin:0 0 12px;color:#e3cd9f}#private-preview summary{cursor:pointer;font-size:.88rem}#private-preview p{margin:9px 0}
+@media (prefers-reduced-motion:no-preference){
+  #paper:not([hidden]){transform-origin:top center;animation:unfold-paper 440ms ease-out both}
+}
+@keyframes unfold-paper{
+  from{opacity:.45;transform:perspective(800px) rotateX(-35deg) scaleY(.7)}
+  to{opacity:1;transform:perspective(800px) rotateX(0) scaleY(1)}
+}
+#preview button,#receive button{margin-block:4px}
+#paper{padding:clamp(23px,6vw,40px);border-color:#b59a67}
+#paper .message{font-size:clamp(1.32rem,4.8vw,1.82rem);line-height:1.42;margin:24px 0 0}
+#signed{margin:18px 0 0;font-size:1.04rem}
+#receive #reply{font-size:.95rem;padding:9px 14px}
+#note-options{margin-top:14px}
+#note-options summary{cursor:pointer;color:var(--green);padding:8px 0;font-size:.94rem}
+#note-tools{margin-top:8px}
+#receive #note-tools button,#receive #install-note{font-size:.88rem;padding:8px 12px}
+#received-install{margin-top:12px}
+.app-credit{text-align:center;border-top:1px solid #9d825244;padding:18px 16px;color:var(--green)}
+.app-credit small{font-size:.78rem}
+.credit-family{display:inline-flex;gap:8px;align-items:center;font-size:.88rem}
+.tangram-mark{width:15px;height:15px;display:inline-block;transform:rotate(-12deg);background:conic-gradient(from 45deg,#b38b50 0 90deg,#e6c58a 90deg 180deg,#866537 180deg 270deg,#caa770 270deg);border:1px solid #dfbe83}
+#received-install{margin-top:4px}
+#receive #install-note{min-height:44px}
+.app-credit{display:flex;justify-content:center;align-items:baseline;flex-wrap:wrap;gap:3px 8px;border-top:0;padding:8px 16px 20px;color:#b0a590}
+.app-credit .credit-family,.app-credit small{font-size:.7rem;margin:0}
+.app-credit .tangram-mark{width:9px;height:9px}
+main.receiving{grid-template-columns:minmax(0,1fr);max-width:790px}
+body:not(.note-open) main.receiving > :last-child{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+#stage-actions{position:absolute;inset:auto 10px 10px;z-index:3;display:grid;justify-items:center;gap:10px;text-align:center;padding:38px 12px 15px;background:linear-gradient(transparent,#101b16ee 65%);border-radius:0 0 7px 7px}
+#stage-actions[hidden]{display:none}
+#stage-actions.delivering{opacity:0;pointer-events:none}
+#stage-actions h1{margin:0;max-width:19ch;color:#fff1d1;font-size:clamp(21px,5vw,38px);line-height:1.1;text-shadow:0 2px 4px #000}
+#stage-actions button{margin:0;min-height:44px;padding:8px 16px;font-size:clamp(.85rem,3.8vw,1.05rem)}
+.stage-status{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);margin:0}
+body:not(.note-open) main.receiving{padding:12px 12px 16px}
+main.receiving .stage{
+  width:min(100%, max(140px, calc((100svh - 116px) * 1.1)));
+  min-width:0;
+  height:auto;
+  aspect-ratio:1.1;
+  max-height:none;
+  justify-self:center;
+  background:#101b16 url(periquito-realejo.jpg) center top / contain no-repeat;
+}
+main.receiving .stage video{object-fit:contain;object-position:center;background:#101b16}
+main.receiving #stage-actions{padding-bottom:12px;background:linear-gradient(transparent,#101b16 72%)}
+@media(max-height:450px){
+  main.receiving #stage-actions{gap:4px;padding:20px 8px 6px}
+  main.receiving #stage-actions h1{font-size:16px}
+  main.receiving #stage-actions button{font-size:.8rem}
+}
+.app-credit{align-items:center}
+.project-portal{display:inline-flex;align-items:center;min-height:32px;padding:2px 9px;border:1px solid #a28b5a70;border-radius:5px;color:inherit;font-size:.72rem;text-decoration:none}
+.project-portal:hover,.project-portal:focus-visible{color:#fff0d2;border-color:#c8a56b}
+</style>
+<p style="text-align:center">Prévia do vídeo Flow · <a href="./">Voltar ao Realejo</a></p><header><span class="brand"><img class="app-mark" src="icon-192.png" width="34" height="34" alt="">REALEJO</span><button id="sound" class="alt" aria-pressed="false">Ligar som</button></header>
+<audio id="ambient" src="valsa-do-realejo.mp3" loop preload="none"></audio>
+<main><div class="stage" id="stage"><video id="birdClip" aria-hidden="true" src="previa-flow.mp4" muted playsinline preload="none"></video><span class="vines" aria-hidden="true"></span><div id="stage-actions" hidden><h1 id="greeting">Tenho uma mensagem para você</h1><p id="hint" class="stage-status" role="status"></p><button id="turn">Gire a manivela</button><button id="unfold" hidden>Abrir a notinha</button></div></div>
+<div><section id="home"><h1>Uma notinha<br>para você.</h1><p>Escreva a notinha. O periquito faz a entrega.</p><div class="actions"><button id="compose">Mandar uma notinha</button><button id="daily" class="alt">Tirar minha notinha do dia</button></div><div class="app-actions"><button id="install-app" class="alt">Instalar</button><button id="share-app" class="alt">Compartilhar app</button></div><small id="app-status" role="status"></small></section>
+<section id="editor" hidden><h1>Mandar uma notinha</h1><form id="form"><label for="mode">Tipo de mensagem</label><select id="mode"><option value="own">Escrever minha notinha</option><option value="random">Sortear por tema</option></select><div id="custom"><label for="body">Sua mensagem</label><textarea id="body" rows="4" maxlength="400" required></textarea></div><div id="themes" hidden><label for="theme">Tema</label><select id="theme"></select></div><label for="signature">Assinatura (opcional)</label><input id="signature" maxlength="60"><button>Conferir cartão</button></form>
+<div id="preview" class="paper" hidden><a id="invite-link" class="sealed-invite"><img src="periquito-realejo.jpg" alt=""><span><small>REALEJO</small><strong>Tem uma mensagem para você</strong></span></a><details id="private-preview"><summary>Conferir minha mensagem</summary><p id="sample" class="message"></p><p id="sampleSign"></p></details><button id="share-interactive">Enviar esta notinha</button><button id="reroll" type="button" class="alt" hidden>Sortear outra</button><button id="copy" class="alt">Copiar link</button><button id="share" class="alt" disabled>Compartilhar só a imagem</button><input id="link" aria-label="Endereço da notinha" readonly hidden><small id="status" role="status"></small></div></section>
+<section id="receive" hidden><div id="paper" class="paper" hidden><div class="note-brand"><img src="periquito-realejo.jpg" alt="" width="58" height="58"><span>REALEJO</span></div><p id="message" class="message"></p><p id="signed"></p></div><button id="reply" hidden>Responder com uma notinha</button><div id="received-install" hidden><button id="install-note" class="alt" type="button">Instalar Realejo</button><small id="install-note-status" role="status"></small></div><details id="note-options" hidden><summary>Opções da notinha</summary><div id="note-tools"><button id="share-note" class="alt">Compartilhar imagem</button><button id="save-note" class="alt">Salvar imagem</button><button id="print-note" class="alt">Imprimir</button></div></details><small id="note-status" role="status"></small></section></div></main><footer class="app-credit"><span class="credit-family"><span class="tangram-mark" aria-hidden="true"></span>Tangram Educativo</span><a class="project-portal" href="https://joaofaustinojr.github.io/-portal-de-projetos/" target="_blank" rel="noopener noreferrer">Portal de projetos ↗</a></footer>
+<script>
+const el=id=>document.getElementById(id);
+const notes={
+'Carinho':['Passei hoje naquele lugar e lembrei de você.','Tomara que o dia te devolva um pouco do carinho que você espalha.','Um abraço em forma de papel, para abrir quando quiser.'],
+'Bom dia':['Que hoje você encontre um motivo pequeno e verdadeiro para sorrir.','Que o café seja quente e o dia, gentil.'],
+'Gratidão':['Tem gestos pequenos que ficam na memória. Obrigado pelos seus.','Que bom que a vida cruzou nossos caminhos.'],
+'Fé':['Que Deus abençoe seu passo de hoje, mesmo que ele seja pequeno.','Que a esperança encontre um cantinho no seu dia.'],
+'Humor':['O periquito pediu um aumento. Aceita sementes.','Se o dia desandar, pelo menos este bilhete chegou andando.']
+};
+// Keep the original pools for links created before the catalog expanded.
+const expandedNotes={
+ 'Carinho': [...notes.Carinho,'Guarde um pouco do dia para você. Esta notinha fica aqui fazendo companhia.','Se eu pudesse, deixava um café e um abraço na sua porta. Por enquanto, vai o bilhete.','Tem gente que melhora a conversa só de chegar. Você é assim.'],
+ 'Bom dia': [...notes['Bom dia'],'Bom dia! Que sobre tempo para tomar o café ainda quente.','Se o dia começar correndo, você ainda pode escolher onde fazer a primeira pausa.','Abra a janela um pouquinho. Aqui vai meu bom dia do outro lado.'],
+ 'Gratidão': [...notes['Gratidão'],'Obrigado por me escutar até quando eu ainda estava procurando as palavras.','Seu jeito de ajudar fez diferença no meu dia. Queria que você soubesse.','Lembrei de uma gentileza sua hoje. Engraçado como essas coisas ficam.'],
+ 'Fé': [...notes['Fé'],'Que Deus lhe dê serenidade para atravessar este dia e bons amigos pelo caminho.','Coloquei seu nome na minha oração de hoje.','Que a paz de Deus encontre lugar aí, mesmo no meio da correria.'],
+ 'Humor': [...notes.Humor,'Este bilhete foi entregue no bico. A logística ainda está em fase de testes.','O periquito leu primeiro. Disse que era para manter segredo e depois contou para todo mundo.','O periquito aceita elogios, sementes e expediente reduzido.'],
+ 'Saudade': ['Vi uma coisa que você acharia engraçada. Ri e, logo depois, senti saudade.','Faz tempo que a gente não conversa sem olhar o relógio. Vamos repetir?','A saudade hoje coube num bilhete. O resto deixo para quando a gente se encontrar.','Tem uma história que eu só sei contar direito quando você está por perto.'],
+ 'Aniversário': ['Feliz aniversário! Que tenha bolo, conversa boa e tempo para ficar mais um pouco à mesa.','Hoje é dia de celebrar você, inclusive essas pequenas manias que fazem tanta falta quando você sai.','Que o novo ano traga encontros que você queira repetir e boas histórias para contar.','Feliz aniversário! O periquito veio com o bilhete. O abraço fica para quando a gente se vir.'],
+ 'Incentivo': ['Se hoje só der para fazer uma parte, já vale começar por ela.','Se precisar de companhia para dar o primeiro passo, me chama.','Leve o tempo que precisar. Eu continuo torcendo por você.','Quando bater a dúvida, lembre de uma coisa que hoje você faz e antes achava difícil.'],
+ 'Parabéns': ['Fiquei feliz com a notícia. Sei o quanto você trabalhou para chegar até aqui.','Tire um instante para comemorar. Você também merece aproveitar o que conquistou.','Bonito ver uma ideia sua ganhar forma. Parabéns por levar adiante.','Parabéns! Espero que você possa contar essa história com calma e um sorriso.']
+};
+// Fontes dos excertos clássicos:
+// https://pt.wikisource.org/wiki/Canção_do_Exílio_(Gonçalves_Dias)
+// https://machado.byu.edu/text/o-espelho/?lang=pt
+// https://dominiopublico.mec.gov.br/pesquisa/DetalheObraDownload.do?co_midia=2&co_obra=28379&select_action=
+const currentNotes={
+  "Carinho": [
+    "Só passei para dizer que gosto muito de ter você por perto.",
+    "Tem dias em que ouvir sua voz já melhora tudo.",
+    "Queria te dar um abraço agora. Vai este bilhete primeiro.",
+    "Pode guardar esta notinha para um dia em que precisar lembrar que é querido.",
+    "Gosto das nossas conversas, até das que começam sem assunto."
+  ],
+  "Bom dia": [
+    "Bom dia! Que a primeira notícia boa chegue antes de o café esfriar.",
+    "Que hoje dê tempo de almoçar sem pressa e rir de alguma bobagem.",
+    "Bom dia! Vim deixar meu oi antes que a correria leve a manhã.",
+    "Que apareça um motivo para você voltar para casa sorrindo hoje.",
+    "Bom dia! Se o café estiver bom, já temos por onde começar."
+  ],
+  "Gratidão": [
+    "Sua ajuda fez diferença. Eu queria te agradecer com calma.",
+    "Obrigado por me escutar até eu conseguir pôr as ideias em ordem.",
+    "Tem uma gentileza sua de que ainda me lembro com carinho.",
+    "Você tornou um dia difícil mais leve. Guardo isso comigo.",
+    "Que bom poder contar com você. Hoje eu quis dizer isso em voz alta."
+  ],
+  "Fé": [
+    "Que Deus te dê paz para o que hoje pesa e coragem para o próximo passo.",
+    "Pedi a Deus que te acompanhe hoje. Receba também meu abraço.",
+    "Que o Senhor te guarde na ida, na volta e em tudo o que acontecer entre elas.",
+    "Que você encontre um instante de silêncio para descansar o coração em Deus.",
+    "Hoje fiz uma oração por você. Que a paz de Cristo chegue aí."
+  ],
+  "Humor": [
+    "O periquito pediu desconto na passagem. Disse que já veio de avião.",
+    "Bilhete entregue no bico. A assinatura saiu meio bicada.",
+    "O periquito topou guardar segredo. Só pediu para contar para o poleiro.",
+    "Se você sorriu, ele já pode lançar a entrega como serviço concluído.",
+    "O periquito aceita elogios. Sementes também. Em dinheiro ele ainda se enrola."
+  ],
+  "Saudade": [
+    "Hoje quase te mandei um áudio só para ouvir o seu depois.",
+    "Senti falta daquelas conversas que começam cedo e acabam sem a gente perceber.",
+    "Tem uma história que guardei para te contar pessoalmente.",
+    "Hoje me bateu vontade de sentar com você e conversar sem olhar a hora.",
+    "Quando a gente se vir, vou querer um abraço demorado."
+  ],
+  "Aniversário": [
+    "Feliz aniversário! Que hoje tenha gente querida por perto e conversa boa depois do bolo.",
+    "Que seu próximo ano te dê mais dias que você queira repetir. Feliz aniversário!",
+    "O periquito trouxe o parabéns. O abraço fica por minha conta quando a gente se encontrar.",
+    "Feliz aniversário! Que sobre tempo para comemorar do seu jeito.",
+    "Hoje eu queria estar aí para cantar parabéns e pegar o segundo pedaço de bolo."
+  ],
+  "Incentivo": [
+    "Faça o que cabe no dia de hoje. Amanhã a gente vê o resto.",
+    "Estou torcendo por você. Se quiser companhia, me chama.",
+    "Você pode começar pela parte que já sabe fazer.",
+    "Se der vontade de desistir hoje, descanse primeiro e decida depois.",
+    "Quando a dúvida apertar, lembra de algo que você aprendeu devagar e hoje faz com confiança."
+  ],
+  "Parabéns": [
+    "Fiquei feliz com a notícia. Tomara que você tenha tempo de comemorar hoje.",
+    "Foi bonito acompanhar o caminho até aqui. Parabéns pela conquista!",
+    "Parabéns! Quero ouvir essa história com todos os detalhes quando a gente se encontrar.",
+    "Que alegria ver sua ideia ganhar forma. Parabéns por levar adiante.",
+    "Espero que você pare um instante para curtir o que acabou de conquistar."
+  ],
+  "Amor": [
+    "Se eu pudesse escolher o melhor momento do dia, seria aquele em que você chega.",
+    "Gosto da vida que a gente vai fazendo nas coisas pequenas, um dia de cada vez.",
+    "Eu ainda sorrio quando aparece seu nome na tela.",
+    "Se sobrar um pedaço do seu dia, quero passar ele com você.",
+    "Te amo. Hoje me deu vontade de dizer antes de qualquer outro assunto."
+  ],
+  "Boa noite": [
+    "Boa noite. Que você consiga largar o peso do dia antes de deitar.",
+    "Durma bem. Amanhã eu quero saber como foi seu dia de hoje.",
+    "Que a noite seja tranquila e o despertador demore a tocar.",
+    "Passei para te desejar boa noite e deixar um abraço aqui.",
+    "Boa noite! Que você encontre sossego até nas coisas que ficaram para amanhã."
+  ],
+  "Clássicos": [
+    "“Minha terra tem palmeiras,\nOnde canta o Sabiá.”\n— Gonçalves Dias, Canção do Exílio",
+    "“A melhor definição do amor não vale um beijo de moça namorada”\n— Machado de Assis, O espelho",
+    "“Amor é um fogo que arde sem se ver”\n— Luís de Camões, Rimas"
+  ]
+};
+// Versículos: https://iterfidei.com/pt/biblia/eclesiastico/6 e https://iterfidei.com/pt/biblia/mateus/11
+const latestNotes={...currentNotes};
+const additions={
+  "Versículos": [
+    "O amigo fiel é uma forte proteção: E quem o achou, achou um tesouro.\n— Eclesiástico 6,14 · Pe. Figueiredo",
+    "Vinde a mim todos os que andais em trabalho, e vos achais carregados, e eu vos aliviarei.\n— Mateus 11,28 · Pe. Figueiredo",
+    "A palavra doce multiplica os amigos, e mitiga os inimigos.\n— Eclesiástico 6,5 (trecho) · Pe. Figueiredo"
+  ],
+  "Clássicos": [
+    "Tudo vale a pena\nSe a alma não é pequena.\n— Fernando Pessoa, Mar Português",
+    "Mudam-se os tempos, mudam-se as vontades.\n— Luís de Camões, Rimas",
+    "Nossos bosques têm mais vida,\nNossa vida mais amores.\n— Gonçalves Dias, Canção do Exílio",
+    "Cada qual sabe amar a seu modo; o modo pouco importa; o essencial é que saiba amar.\n— Machado de Assis, Ressurreição"
+  ],
+  "Bom dia": [
+    "Bom dia! Vim te dar um oi antes que o café esfrie e o dia invente serviço."
+  ],
+  "Gratidão": [
+    "Você me ajudou naquele dia. Talvez nem lembre. Eu lembro."
+  ],
+  "Incentivo": [
+    "Se o dia estiver pesado, comece pelo que cabe na mão. O resto pode esperar um pouco."
+  ],
+  "Humor": [
+    "Ô loco, até o periquito veio entregar. Agora você vai ter que responder."
+  ]
+};
+for(const [theme,messages] of Object.entries(additions))latestNotes[theme]=[...(currentNotes[theme]??[]),...messages];
+const occasionNotes={...latestNotes};
+for(const [theme,messages] of Object.entries({
+  "Boa tarde": [
+    "Boa tarde! Se der tempo, faz um café. Se sobrar um pouco, me chama.",
+    "Passei pra deixar um boa tarde e perguntar: como foi a primeira metade do seu dia?",
+    "Boa tarde! Que apareça uma conversa boa entre um compromisso e outro.",
+    "Que a tarde seja leve. E, se chover, que você esteja do lado de dentro com café passado."
+  ],
+  "Boa noite": [
+    "Boa noite! O resto da conversa a gente deixa pra amanhã. Gostei de falar com você.",
+    "A luz já apagou por aí? Passei só pra desejar que você durma bem.",
+    "Boa noite. Que Deus cuide do seu descanso e te dê um amanhecer tranquilo."
+  ],
+  "Boa viagem": [
+    "Boa viagem! Me dá um alô quando chegar. Vou gostar de saber que você chegou bem.",
+    "Que Deus acompanhe sua ida e sua volta. Aproveite o caminho.",
+    "Boa viagem! Se encontrar uma paisagem bonita, guarda um pedacinho dela numa foto pra mim.",
+    "Vai com calma, aproveita o caminho e volta com histórias pra contar."
+  ],
+  "Saudade": [
+    "Passei por aquele lugar e, por um segundo, achei que ia te encontrar lá.",
+    "Tinha café fresco aqui e faltou você pra tomar a segunda xícara.",
+    "Hoje deu saudade até de ouvir você contar uma história que eu já sei de cor."
+  ]
+})){
+  occasionNotes[theme]=[...(latestNotes[theme]??[]),...messages];
+}
+function notePool(version){return version===5?occasionNotes:version===4?latestNotes:version===3?currentNotes:version===2?expandedNotes:notes}
+const dailyNotes=[
+ 'Escolha uma coisa pequena para fazer com calma. Pode ser só tomar o primeiro café.',
+ 'Se lembrar de alguém hoje, diga. Às vezes a melhor hora de mandar um oi é a hora em que a pessoa vem à cabeça.',
+ 'Olhe pela janela antes de olhar as notificações. Veja como está o céu daí.',
+ 'Dê uma chance à ideia que você anotou e deixou para depois. Leia de novo.',
+ 'Se uma tarefa estiver pesando, veja qual é a menor parte que você consegue começar agora.',
+ 'No fim do dia, tente lembrar de algo que valeu a pena. Pode ser uma conversa de dois minutos.',
+ 'Se puder, faça um favor pequeno a alguém. Pense no último favor pequeno que facilitou o seu dia.',
+ 'Escolha uma música antiga e ouça até o fim. Veja de que lugar ela faz você lembrar.',
+ 'Algumas conversas começam melhor com “como foi seu dia?” do que com um conselho.',
+ 'Hoje, repare numa coisa que existe há muito tempo no caminho que você costuma fazer.',
+ 'Dê a si mesmo o mesmo tempo que você daria a um amigo para aprender algo novo.',
+ 'Quem fez parte de um dia bom seu talvez nem saiba. Ainda dá para contar.',
+ 'Antes de aceitar mais uma tarefa, confira se deixou algum tempo para descansar.',
+ 'Um plano antigo pode caber no presente se começar menor. Qual seria o primeiro passo?',
+ 'Se o dia estiver cheio, experimente fazer uma coisa por vez até a próxima pausa.',
+ 'Anote algo que você ouviu hoje e gostaria de lembrar daqui a um ano.',
+ 'Hoje pode ser um bom dia para terminar aquela conversa que ficou pela metade.',
+ 'Que você encontre alguém com quem rir de uma coisa pequena e sem importância.',
+ 'Se estiver dando tudo certo, aproveite um pouco antes de pensar no próximo compromisso.',
+ 'De vez em quando, vale fazer um caminho diferente só para ver o que tem na outra rua.',
+ 'Lembre de alguém que lhe ensinou algo com paciência. Talvez seja um bom dia para agradecer.'
+];
+for(const name of Object.keys(occasionNotes))el('theme').add(new Option(name,name));
+function screen(id){for(const name of ['home','editor','receive'])el(name).hidden=name!==id;el('stage-actions').hidden=id!=='receive';el('stage').parentElement.classList.toggle('receiving',id==='receive')}
+function encode(note){return btoa(Array.from(new TextEncoder().encode(JSON.stringify(typeof note.body==='string'?[note.body,note.sign]:[note.catalog,note.theme,note.seed,note.sign])),n=>String.fromCharCode(n)).join('')).replaceAll('+','-').replaceAll('/','_').replace(/=+$/,'')}
+function decode(code){if(code.length>4500)throw Error();const bytes=Uint8Array.from(atob(code.replaceAll('-','+').replaceAll('_','/')),c=>c.charCodeAt(0));const data=JSON.parse(new TextDecoder().decode(bytes));const n=Array.isArray(data)?data.length===2?{body:data[0],sign:data[1]}:data.length===3?{catalog:2,theme:data[0],seed:data[1],sign:data[2]}:data.length===4&&(data[0]===3||data[0]===4||data[0]===5)?{catalog:data[0],theme:data[1],seed:data[2],sign:data[3]}:{}:data;if(typeof n.sign!=='string'||n.sign.length>60||!(typeof n.body==='string'&&n.body.trim()&&n.body.length<=400||Object.hasOwn(notePool(n.catalog),n.theme)&&Number.isInteger(n.seed)&&n.seed>=0))throw Error();return n}
+let note, audio, effectGain, duckTimer;
+const ambient=el('ambient');
+const sound=el('sound');
+const ambientLevel=.19;
+let soundEnabled=true;
+let soundAttempt=0;
+ambient.volume=ambientLevel;
+function reflectSound(){
+  const playing=soundEnabled&&(!ambient.paused||!el('birdClip').paused);
+  sound.setAttribute('aria-pressed',String(playing));
+  sound.textContent=playing?'Som ligado':'Ligar som';
+}
+async function startAmbient(){
+  const attempt=++soundAttempt;
+  try{
+    await ambient.play();
+    if(!soundEnabled)ambient.pause();
+  }catch{}
+  if(attempt===soundAttempt)reflectSound();
+}
+document.addEventListener('click',event=>{
+  if(soundEnabled&&ambient.paused&&el('birdClip').paused&&!sound.contains(event.target))startAmbient();
+},true);
+ambient.addEventListener('pause',reflectSound);
+function melody(){if(!soundEnabled)return;
+ambient.volume=.055;
+clearTimeout(duckTimer);
+duckTimer=setTimeout(()=>{ambient.volume=ambientLevel},1850);
+try{
+audio??=new AudioContext();
+effectGain?.disconnect();
+effectGain=audio.createGain();
+effectGain.connect(audio.destination);
+audio.resume().catch(()=>{});[523,659,784,659,587,698,880,1047].forEach((hz,i)=>{const t=audio.currentTime+i*.14+(i===7?.55:0),o=audio.createOscillator(),g=audio.createGain();o.type=i===7?'sine':'triangle';o.frequency.value=hz;if(i===7)o.frequency.exponentialRampToValueAtTime(1850,t+.09);g.gain.setValueAtTime(.001,t);g.gain.exponentialRampToValueAtTime(.09,t+.025);g.gain.exponentialRampToValueAtTime(.001,t+.2);o.connect(g).connect(effectGain);o.start(t);o.stop(t+.21)})}catch{}}
+sound.onclick=()=>{
+  soundEnabled=!soundEnabled;
+  el('birdClip').muted=!soundEnabled;
+  if(!soundEnabled){soundAttempt++;ambient.pause();if(effectGain)effectGain.gain.value=0;}
+  else if(el('birdClip').paused)startAmbient();
+  reflectSound();
+};
+function compose(){document.body.classList.remove('note-open');history.replaceState(null,'',location.pathname+location.search);el('stage').classList.remove('spin','show');el('birdClip').classList.remove('is-visible');screen('editor');el('mode').focus()}
+el('compose').onclick=el('reply').onclick=compose;
+el('form').oninput=()=>{const own=el('mode').value==='own';el('body').required=own;el('custom').hidden=!own;el('themes').hidden=own;el('preview').hidden=true;el('body').setCustomValidity('')};
+let previewNote;
+function drawNote(theme, sign, previous){
+  const count=occasionNotes[theme].length;
+  const random=crypto.getRandomValues(new Uint32Array(1))[0];
+  const seed=previous?.theme===theme&&count>1
+    ? (previous.seed+1+random%(count-1))%count
+    : random%count;
+  return {catalog:5,theme,seed,sign};
+}
+function showPreview(note){
+  previewNote=note;
+  const pool=notePool(note.catalog)[note.theme];
+  const url=new URL('./?cartao=2',location.href);
+  url.hash='n='+encode(note);
+  el('link').value=url.href;
+  el('link').hidden=true;
+  el('invite-link').href=url.href;
+  el('sample').textContent=note.body??pool[note.seed%pool.length];
+  el('sampleSign').textContent=note.sign;
+  el('private-preview').open=true;
+  el('reroll').hidden=typeof note.body==='string'||pool.length<2;
+  el('status').textContent='';
+  el('preview').hidden=false;
+  prepareInvitationCard();
+}
+el('form').onsubmit=event=>{
+  event.preventDefault();
+  const body=el('body').value;
+  const own=el('mode').value==='own';
+  if(own&&!body.trim()){
+    el('body').setCustomValidity('Escreva uma mensagem.');
+    el('body').reportValidity();
+    return;
+  }
+  const sign=el('signature').value.trim();
+  showPreview(own?{body,sign}:drawNote(el('theme').value,sign));
+  el('sample').tabIndex=-1;
+  el('sample').focus();
+};
+el('reroll').onclick=()=>{
+  showPreview(drawNote(previewNote.theme,previewNote.sign,previewNote));
+  el('sample').focus();
+};
+el('share-interactive').onclick=async()=>{
+  const text=el('link').value;
+  if(!navigator.share)return el('copy').click();
+  try{await navigator.share({text})}
+  catch(error){if(error.name!=='AbortError')el('copy').click()}
+};
+el('copy').onclick=async()=>{try{await navigator.clipboard.writeText(el('link').value);el('status').textContent='Link copiado.'}catch{el('link').hidden=false;el('link').focus();el('link').select();el('status').textContent='Copie o link selecionado.'}};
+function receive(n,daily=false){note=n;screen('receive');if(!matchMedia('(prefers-reduced-motion: reduce)').matches){const clip=el('birdClip');clip.preload='auto';clip.load()}el('greeting').textContent=daily?'Sua notinha do dia':'Tenho uma mensagem para você'}
+el('daily').onclick=()=>{const day=Math.floor((Date.now()-new Date().getTimezoneOffset()*60000)/86400000);receive({body:dailyNotes[((day%dailyNotes.length)+dailyNotes.length)%dailyNotes.length],sign:''},true);el('turn').focus()};
+el('turn').onclick=()=>{
+  el('turn').disabled=true;
+  el('stage-actions').classList.add('delivering');
+  el('hint').textContent='O periquito está buscando sua notinha…';
+  const clip=el('birdClip');
+  ambient.pause();
+  clip.muted=!soundEnabled;
+  const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let fallback;
+  function showVideo(){
+    clearTimeout(fallback);
+    clip.classList.add('is-visible');
+    reflectSound();
+    fallback=setTimeout(delivered,15000);
+  }
+  function delivered(){
+    clearTimeout(fallback);
+    clip.removeEventListener('playing',showVideo);
+    clip.removeEventListener('ended',delivered);
+    clip.removeEventListener('error',delivered);
+    clip.pause();
+    if(soundEnabled)startAmbient();
+    if(!clip.ended)clip.classList.remove('is-visible');
+    el('stage-actions').classList.remove('delivering');
+    el('greeting').hidden=true;
+    el('turn').hidden=true;
+    el('unfold').hidden=false;
+    el('hint').textContent='O periquito trouxe um papel dobrado.';
+    el('unfold').focus();
+  }
+  if(reduced){delivered();return}
+  clip.addEventListener('playing',showVideo,{once:true});
+  clip.addEventListener('ended',delivered,{once:true});
+  clip.addEventListener('error',delivered,{once:true});
+  fallback=setTimeout(delivered,4500);
+  clip.play().catch(()=>{if(!el('turn').hidden)delivered()});
+};
+el('unfold').onclick=()=>{gtag('event','realejo_notinha_aberta');const pool=notePool(note.catalog)[note.theme];el('message').textContent=note.body??pool[note.seed%pool.length];el('signed').textContent=note.sign;el('signed').hidden=!note.sign;document.body.classList.add('note-open');el('paper').hidden=false;el('note-options').open=false;el('note-options').hidden=false;el('received-install').hidden=false;el('install-note').textContent=installed()?'Realejo instalado':'Instalar Realejo';prepareNoteImage();el('paper').tabIndex=-1;el('paper').focus();el('unfold').hidden=true;el('hint').hidden=true;el('reply').hidden=false};
+let noteImage;
+function wrappedLines(ctx,text,maxWidth){
+  const rows=[];
+  for(const paragraph of text.split('\n')){
+    let row='';
+    for(const word of paragraph.split(' ')){
+      const next=row?row+' '+word:word;
+      if(ctx.measureText(next).width<=maxWidth){row=next;continue}
+      if(row)rows.push(row);
+      row='';
+      for(const char of word){
+        if(row&&ctx.measureText(row+char).width>maxWidth){rows.push(row);row=''}
+        row+=char;
+      }
+    }
+    rows.push(row);
+  }
+  return rows;
+}
+async function buildNoteImage(message,signatureText){
+    const portrait=el('paper').querySelector('img');
+    await portrait.decode();
+    const canvas=document.createElement('canvas');
+    canvas.width=1080;
+    const ctx=canvas.getContext('2d');
+    ctx.font='49px Georgia, serif';
+    const rows=wrappedLines(ctx,message,888);
+    ctx.font='italic 35px Georgia, serif';
+    const signature=signatureText?wrappedLines(ctx,signatureText,888):[];
+    canvas.height=Math.max(680,270+rows.length*65+signature.length*48);
+    const gradient=ctx.createLinearGradient(0,0,1080,canvas.height);
+    gradient.addColorStop(0,'#343125');
+    gradient.addColorStop(1,'#171e1d');
+    ctx.fillStyle=gradient;
+    ctx.fillRect(0,0,1080,canvas.height);
+    ctx.strokeStyle='#9d8252';
+    ctx.lineWidth=2;
+    ctx.strokeRect(28,28,1024,canvas.height-56);
+    ctx.save();
+    ctx.beginPath();
+    ctx.arc(146,139,49,0,Math.PI*2);
+    ctx.clip();
+    const crop=Math.min(portrait.naturalWidth,portrait.naturalHeight);
+    ctx.drawImage(portrait,(portrait.naturalWidth-crop)*.62,(portrait.naturalHeight-crop)/2,crop,crop,97,90,98,98);
+    ctx.restore();
+    ctx.fillStyle='#e2c68f';
+    ctx.font='bold 28px Georgia, serif';
+    ctx.fillText('R E A L E J O',216,149);
+    ctx.fillRect(96,213,888,1);
+    ctx.fillStyle='#f3e6ca';
+    ctx.font='49px Georgia, serif';
+    rows.forEach((row,i)=>ctx.fillText(row,96,285+i*65));
+    ctx.fillStyle='#e2c68f';
+    ctx.font='italic 35px Georgia, serif';
+    signature.forEach((row,i)=>ctx.fillText(row,96,294+rows.length*65+i*48));
+
+    const blob=await new Promise(resolve=>canvas.toBlob(resolve,'image/png'));
+    if(!blob)throw Error();
+    return new File([blob],'notinha-realejo.png',{type:'image/png'});
+
+}
+let invitationFile;
+async function prepareInvitationCard(){
+  if(invitationFile)return;
+  try{
+    const picture=el('invite-link').querySelector('img');
+    await picture.decode();
+    const canvas=document.createElement('canvas');
+    canvas.width=1080;
+    canvas.height=940;
+    const ctx=canvas.getContext('2d');
+    ctx.fillStyle='#17241f';
+    ctx.fillRect(0,0,1080,940);
+    const scale=Math.max(1024/picture.naturalWidth,610/picture.naturalHeight);
+    const width=picture.naturalWidth*scale,height=picture.naturalHeight*scale;
+    ctx.save();
+    ctx.beginPath();
+    ctx.rect(28,28,1024,610);
+    ctx.clip();
+    ctx.drawImage(picture,(1080-width)/2,28+(610-height)/2,width,height);
+    ctx.restore();
+    ctx.strokeStyle='#c8a56b';
+    ctx.lineWidth=2;
+    ctx.strokeRect(27,27,1026,886);
+    ctx.textAlign='center';
+    ctx.fillStyle='#dfbe83';
+    ctx.font='26px Georgia, serif';
+    ctx.fillText('R E A L E J O',540,713);
+    ctx.fillStyle='#fff0d2';
+    ctx.font='bold 59px Georgia, serif';
+    ctx.fillText('Tem uma mensagem',540,793,840);
+    ctx.fillText('para você',540,855,840);
+    const blob=await new Promise(resolve=>canvas.toBlob(resolve,'image/jpeg',.92));
+    if(!blob)throw new Error('Cartão indisponível');
+    invitationFile=new File([blob],'cartao-realejo.jpg',{type:'image/jpeg'});
+    el('share').disabled=false;
+  }catch{
+    el('status').textContent='Cartão indisponível. Você pode enviar a notinha interativa.';
+  }
+}
+el('share').onclick=async()=>{
+  const file=invitationFile;
+  if(!file)return;
+  const payload={files:[file]};
+  if(navigator.canShare?.(payload)){
+    try{await navigator.share(payload);return}catch(error){if(error.name==='AbortError')return}
+  }
+  const url=URL.createObjectURL(file);
+  const link=document.createElement('a');
+  link.href=url;
+  link.download=file.name;
+  link.click();
+  setTimeout(()=>URL.revokeObjectURL(url),30000);
+  el('status').textContent='Cartão salvo para compartilhar.';
+};
+async function prepareNoteImage(){
+  const share=el('share-note'),save=el('save-note');
+  share.disabled=true;
+  save.disabled=true;
+  el('note-status').textContent='';
+  try{
+    noteImage=await buildNoteImage(el('message').textContent,el('signed').textContent);
+    share.disabled=false;
+    save.disabled=false;
+  }catch{
+    el('note-status').textContent='A imagem não ficou disponível. Você ainda pode imprimir o bilhete.';
+  }
+}
+function saveNote(){
+  const url=URL.createObjectURL(noteImage);
+  const link=document.createElement('a');
+  link.href=url;
+  link.download=noteImage.name;
+  link.click();
+  setTimeout(()=>URL.revokeObjectURL(url),30000);
+}
+el('save-note').onclick=saveNote;
+el('print-note').onclick=()=>window.print();
+el('share-note').onclick=async()=>{
+  const payload={files:[noteImage],title:'Minha notinha do Realejo'};
+  if(navigator.canShare?.(payload)){
+    try{await navigator.share(payload);return}
+    catch(error){if(error.name==='AbortError')return}
+  }
+  saveNote();
+  el('note-status').textContent='Imagem salva para você compartilhar.';
+};
+if(location.hash.startsWith('#n=')){try{receive(decode(location.hash.slice(3)))}catch{el('home').querySelector('p').textContent='Este link de notinha está incompleto. Você pode criar outro cartão.'}}
+let installPrompt;
+const installed=()=>matchMedia('(display-mode: standalone)').matches||navigator.standalone===true;
+el('install-app').hidden=installed();
+window.addEventListener('beforeinstallprompt',event=>{event.preventDefault();installPrompt=event});
+window.addEventListener('appinstalled',()=>{installPrompt=null;el('install-app').hidden=true;el('install-note').textContent='Realejo instalado';el('install-note-status').textContent=''});
+async function requestInstall(status){
+  status.textContent='';
+  if(installPrompt){
+    const prompt=installPrompt;
+    installPrompt=null;
+    try{await prompt.prompt();return}catch{}
+  }
+  status.textContent=/iPad|iPhone|iPod/.test(navigator.userAgent)
+    ? 'No Safari, toque em Compartilhar e depois em Adicionar à Tela de Início.'
+    : 'Abra no navegador e use o menu ⋮ para escolher Instalar app ou Adicionar à tela inicial.';
+}
+el('install-app').onclick=()=>requestInstall(el('app-status'));
+el('install-note').onclick=()=>{
+  const status=el('install-note-status');
+  if(installed()||el('install-note').textContent==='Realejo instalado'){
+    status.textContent='O Realejo já está instalado neste aparelho.';
+    return;
+  }
+  return requestInstall(status);
+};
+el('share-app').onclick=async()=>{
+  const url=new URL('./?realejo=8',location.href).href;
+  const title='Realejo · Notas e mensagens exclusivas';
+  try{if(navigator.share){await navigator.share({title,url});return}}catch(error){if(error.name==='AbortError')return}
+  try{await navigator.clipboard.writeText(url);el('app-status').textContent='Link do Realejo copiado.'}
+  catch{const link=document.createElement('a');link.href=url;link.textContent=url;el('app-status').replaceChildren(link)}
+};
+if('serviceWorker' in navigator)Promise.resolve();
+</script></html>
