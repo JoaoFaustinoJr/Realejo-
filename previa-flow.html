@@ -125,7 +125,7 @@ main.receiving #stage-actions{padding-bottom:12px;background:linear-gradient(tra
 
 .stage,main.receiving .stage{
  width:min(100%,420px,calc((100svh - 175px)*640/1138));
- height:auto;min-height:0;aspect-ratio:640/1138;
+ height:auto;min-height:0;max-height:none;aspect-ratio:640/1138;justify-self:center;
  background:#101b16 url(previa-flow-poster.jpg) center / contain no-repeat;
  overflow:hidden;
 }
@@ -134,7 +134,7 @@ main.receiving #stage-actions{padding-bottom:12px;background:linear-gradient(tra
 @media(max-height:450px){.stage,main.receiving .stage{width:min(100%,230px)}}
 </style>
 <p style="text-align:center">Prévia do vídeo Flow · <a href="./">Voltar ao Realejo</a></p><header><span class="brand"><img class="app-mark" src="icon-192.png" width="34" height="34" alt="">REALEJO</span><button id="sound" class="alt" aria-pressed="false">Ligar som</button></header>
-<audio id="ambient" src="trilha-flow.mp3" loop preload="none"></audio>
+<audio id="ambient" src="valsa-do-realejo.mp3" loop preload="none"></audio>
 <main><div class="stage" id="stage"><video id="birdClip" aria-hidden="true" src="previa-flow.mp4" poster="previa-flow-poster.jpg" muted playsinline preload="none"></video><span class="vines" aria-hidden="true"></span><div id="stage-actions" hidden><h1 id="greeting">Tenho uma mensagem para você</h1><p id="hint" class="stage-status" role="status"></p><button id="turn">Gire a manivela</button><button id="unfold" hidden>Abrir a notinha</button></div></div>
 <div><section id="home"><h1>Uma notinha<br>para você.</h1><p>Escreva a notinha. O periquito faz a entrega.</p><div class="actions"><button id="compose">Mandar uma notinha</button><button id="daily" class="alt">Tirar minha notinha do dia</button></div><div class="app-actions"><button id="install-app" class="alt">Instalar</button><button id="share-app" class="alt">Compartilhar app</button></div><small id="app-status" role="status"></small></section>
 <section id="editor" hidden><h1>Mandar uma notinha</h1><form id="form"><label for="mode">Tipo de mensagem</label><select id="mode"><option value="own">Escrever minha notinha</option><option value="random">Sortear por tema</option></select><div id="custom"><label for="body">Sua mensagem</label><textarea id="body" rows="4" maxlength="400" required></textarea></div><div id="themes" hidden><label for="theme">Tema</label><select id="theme"></select></div><label for="signature">Assinatura (opcional)</label><input id="signature" maxlength="60"><button>Conferir cartão</button></form>
@@ -335,12 +335,13 @@ function decode(code){if(code.length>4500)throw Error();const bytes=Uint8Array.f
 let note, audio, effectGain, duckTimer;
 const ambient=el('ambient');
 const sound=el('sound');
-const ambientLevel=.65;
+const ambientLevel=.22;
+let deliveringClip=false;
 let soundEnabled=true;
 let soundAttempt=0;
 ambient.volume=ambientLevel;
 function reflectSound(){
-  const playing=soundEnabled&&!ambient.paused;
+  const playing=soundEnabled&&(!ambient.paused||(!el('birdClip').paused&&!el('birdClip').muted));
   sound.setAttribute('aria-pressed',String(playing));
   sound.textContent=playing?'Som ligado':'Ligar som';
 }
@@ -348,12 +349,12 @@ async function startAmbient(){
   const attempt=++soundAttempt;
   try{
     await ambient.play();
-    if(!soundEnabled)ambient.pause();
+    if(!soundEnabled||deliveringClip)ambient.pause();
   }catch{}
   if(attempt===soundAttempt)reflectSound();
 }
 document.addEventListener('click',event=>{
-  if(soundEnabled&&ambient.paused&&!sound.contains(event.target))startAmbient();
+  if(soundEnabled&&!deliveringClip&&ambient.paused&&!sound.contains(event.target))startAmbient();
 },true);
 ambient.addEventListener('pause',reflectSound);
 function melody(){if(!soundEnabled)return;
@@ -368,9 +369,9 @@ effectGain.connect(audio.destination);
 audio.resume().catch(()=>{});[523,659,784,659,587,698,880,1047].forEach((hz,i)=>{const t=audio.currentTime+i*.14+(i===7?.55:0),o=audio.createOscillator(),g=audio.createGain();o.type=i===7?'sine':'triangle';o.frequency.value=hz;if(i===7)o.frequency.exponentialRampToValueAtTime(1850,t+.09);g.gain.setValueAtTime(.001,t);g.gain.exponentialRampToValueAtTime(.09,t+.025);g.gain.exponentialRampToValueAtTime(.001,t+.2);o.connect(g).connect(effectGain);o.start(t);o.stop(t+.21)})}catch{}}
 sound.onclick=()=>{
   soundEnabled=!soundEnabled;
-  el('birdClip').muted=true;
+  el('birdClip').muted=!soundEnabled;
   if(!soundEnabled){soundAttempt++;ambient.pause();if(effectGain)effectGain.gain.value=0;}
-  else startAmbient();
+  else if(!deliveringClip)startAmbient();
   reflectSound();
 };
 function compose(){document.body.classList.remove('note-open');history.replaceState(null,'',location.pathname+location.search);el('stage').classList.remove('spin','show');el('birdClip').classList.remove('is-visible');screen('editor');el('mode').focus()}
@@ -433,8 +434,10 @@ el('turn').onclick=()=>{
   el('stage-actions').classList.add('delivering');
   el('hint').textContent='O periquito está buscando sua notinha…';
   const clip=el('birdClip');
-  clip.muted=true;
-  if(soundEnabled&&ambient.paused)startAmbient();
+  deliveringClip=true;
+  ambient.pause();
+  clip.currentTime=0;
+  clip.muted=!soundEnabled;
   const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
   let fallback;
   function showVideo(){
@@ -449,6 +452,9 @@ el('turn').onclick=()=>{
     clip.removeEventListener('ended',delivered);
     clip.removeEventListener('error',delivered);
     clip.pause();
+    deliveringClip=false;
+    if(soundEnabled)startAmbient();
+    reflectSound();
     if(!clip.ended)clip.classList.remove('is-visible');
     el('stage-actions').classList.remove('delivering');
     el('greeting').hidden=true;
@@ -462,7 +468,7 @@ el('turn').onclick=()=>{
   clip.addEventListener('ended',delivered,{once:true});
   clip.addEventListener('error',delivered,{once:true});
   fallback=setTimeout(delivered,4500);
-  clip.play().catch(()=>{if(!el('turn').hidden)delivered()});
+  clip.play().catch(()=>{clip.muted=true;clip.play().catch(delivered)});
 };
 el('unfold').onclick=()=>{gtag('event','realejo_notinha_aberta');const pool=notePool(note.catalog)[note.theme];el('message').textContent=note.body??pool[note.seed%pool.length];el('signed').textContent=note.sign;el('signed').hidden=!note.sign;document.body.classList.add('note-open');el('paper').hidden=false;el('note-options').open=false;el('note-options').hidden=false;el('received-install').hidden=false;el('install-note').textContent=installed()?'Realejo instalado':'Instalar Realejo';prepareNoteImage();el('paper').tabIndex=-1;el('paper').focus();el('unfold').hidden=true;el('hint').hidden=true;el('reply').hidden=false};
 let noteImage;
